@@ -1,28 +1,46 @@
 "use client"
-import ResponsiveReactGridLayout from 'react-grid-layout'
+import { Responsive as ResponsiveGridLayout } from "react-grid-layout";
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
-import React from 'react'
+import React,{useState} from 'react'
 import Card from './Card';
+import mockup from '../mockup/mockup.json';
+import { generateLayouts } from '@/utils/layoutGenerator';
+import { pdfjs } from 'react-pdf';
+const isMobile = require('is-mobile');
 
-
-const GridLayout = ({data}) => {
-    const layouts = {
-        lg: [{i: 'a', x: 0, y: 0, w: 1, h: 2}],
-        md: [{i: 'a', x: 0, y: 0, w: 1, h: 2}],
-        // ... other breakpoints
-      };
-    
+const GridLayout = ({data=mockup, draggable=null}) => {
+  let cols = isMobile()?2:4
+    let initLayouts = generateLayouts(data.length,cols );
+    const [layouts, setLayouts] = useState(initLayouts)
+    console.log(data)
+    pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+      'pdfjs-dist/build/pdf.worker.min.js',
+      import.meta.url,
+    ).toString();
       return (
-        <ResponsiveReactGridLayout
+        <div className='bg-slate-300	'>
+        <ResponsiveGridLayout
           className="layout"
+          style={{paddingTop:5}}
           breakpoints={{lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0}}
-          cols={{lg: 12, md: 10, sm: 6, xs: 4, xxs: 2}}
-          layouts={layouts}
+          cols={{ lg: 4, md: 4, sm: 2, xs: 2, xxs: 2 }}
+          layouts={{lg:layouts}}
+          margin={[15,20]}
+          isDraggable={draggable}
+          onLayoutChange={(l)=>setLayouts(l)}
           width={window.innerWidth} // You might want to use a more sophisticated method to get width
         >
-          <Card key="a">Item A</Card>
-        </ResponsiveReactGridLayout>
+        {data?data.map((item,i)=>{
+          return (
+          <div key={i.toString()}>
+          <Card  bon={item} />
+          </div>
+          )
+        }):null
+        }
+        </ResponsiveGridLayout>
+        </div>
       );
     };
 export default GridLayout

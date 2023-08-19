@@ -1,9 +1,10 @@
-import {Main} from '../components'
+import {Login} from '../components'
 
 const Home = ()=>{
   return(
-    <div>
-      <Main />
+    <div className='w-full h-full'>
+      <Login />
+      {/* <p>dsadassasdadsadas</p> */}
     </div>
   )
 

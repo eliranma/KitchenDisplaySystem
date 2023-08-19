@@ -1,7 +1,7 @@
 
 
 
-const Screen = (children) => {
+const Screen = ({children}) => {
     
       return (
         <div className="w-full h-full">
