@@ -2,10 +2,15 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import ServerSideAPI from '../utils/api';
+import { useAppContext } from '@/context/AppContext';
 
 const LoginForm = ({ username=null, password=null }) => {
+  
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState('');
+  const { setData} = useAppContext()
+  const [user, setUser] = useState("")
+  const [pass, setPass] = useState("")
 
   useEffect(() => {
     console.log(username, password);
@@ -14,19 +19,20 @@ const LoginForm = ({ username=null, password=null }) => {
     }
   }, []);
 
-  const handleLogin = async () => {
-    if (!username || !password) return;
-
-    const success = await ServerSideAPI.login(username, password);
+  const handleLogin = async (u=username, p=password) => {
+    if (!u || !p) return;
+    const success = await ServerSideAPI.login(u, p);
 
     if (success) {
       // Simulate session object
       localStorage.setItem('session', JSON.stringify(success));
-      router.push('/orders', {queryParams:success});
+      setData({session:success})
+      router.push('/orders');
     } else {
       setErrorMessage('Login failed. Please check your credentials.');
     }
   };
+  
 
   return (
     <div dir="rtl" className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -40,7 +46,9 @@ const LoginForm = ({ username=null, password=null }) => {
             <input
               type="text"
               id="username"
+              value={user}
               className="w-full border rounded px-3 py-2"
+              onChange={e=>setUser(e.target.value)}
               placeholder="הזן מזהה לקוח"
             />
           </div>
@@ -51,12 +59,14 @@ const LoginForm = ({ username=null, password=null }) => {
             <input
               type="password"
               id="password"
+              value={pass}
+              onChange={e=>setPass(e.target.value)}
               className="w-full border rounded px-3 py-2"
               placeholder="הזן מזהה מכשיר"
             />
           </div>
           <button
-            type="submit"
+            onClick={()=>handleLogin(user, pass)}
             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
           >
             התחבר

@@ -2,7 +2,7 @@ import { Main } from "../../components";
 
 const Home = () => {
   return (
-    <div class="space-y-8">
+    <div className="bg-slate-300 space-y-8">
       <Main />
     </div>
   );

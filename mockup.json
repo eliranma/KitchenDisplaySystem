@@ -1,0 +1,2852 @@
+[
+  {
+    "_id": "64e1f3f19d8dc796e4b08b92",
+    "dealId": "1593268720",
+    "tblNo": 1,
+    "customerId": "1",
+    "customerName": "Customer 1",
+    "orderType": 1,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 101,
+    "prnName": "Printer 1",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 1-1",
+        "count": {
+          "$numberDecimal": "1.5"
+        },
+        "price": {
+          "$numberDecimal": "11"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 1",
+        "portionId": 1,
+        "portionName": "Portion 1",
+        "tmOrder": "2023-07-15T12:11:00.000Z",
+        "alias": "Alias 1-1",
+        "_id": "64e1f3f19d8dc796e4b08b93"
+      },
+      {
+        "description": "Item 1-2",
+        "count": {
+          "$numberDecimal": "0.5"
+        },
+        "price": {
+          "$numberDecimal": "6"
+        },
+        "canceled": true,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 1",
+        "portionId": 1,
+        "portionName": "Portion 1",
+        "tmOrder": "2023-07-15T12:11:00.000Z",
+        "alias": "Alias 1-2",
+        "_id": "64e1f3f19d8dc796e4b08b94"
+      }
+    ],
+    "servingId": 1001,
+    "tmOpen": "2023-07-15T12:11:00.000Z",
+    "servingName": "Serving 1",
+    "priceList": "List 1",
+    "future": false,
+    "gst": 1
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08b95",
+    "dealId": "6842464835",
+    "tblNo": 2,
+    "customerId": "2",
+    "customerName": "Customer 2",
+    "orderType": 2,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 102,
+    "prnName": "Printer 2",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 2-1",
+        "count": {
+          "$numberDecimal": "3"
+        },
+        "price": {
+          "$numberDecimal": "12"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 2",
+        "portionId": 2,
+        "portionName": "Portion 2",
+        "tmOrder": "2023-07-15T12:11:00.000Z",
+        "alias": "Alias 2-1",
+        "_id": "64e1f3f19d8dc796e4b08b96"
+      },
+      {
+        "description": "Item 2-2",
+        "count": {
+          "$numberDecimal": "1"
+        },
+        "price": {
+          "$numberDecimal": "7"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 2",
+        "portionId": 2,
+        "portionName": "Portion 2",
+        "tmOrder": "2023-07-15T12:12:00.000Z",
+        "alias": "Alias 2-2",
+        "_id": "64e1f3f19d8dc796e4b08b97"
+      }
+    ],
+    "servingId": 1002,
+    "tmOpen": "2023-07-15T12:11:00.000Z",
+    "servingName": "Serving 2",
+    "priceList": "List 2",
+    "future": true,
+    "gst": 2
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08b98",
+    "dealId": "8350868898",
+    "tblNo": 3,
+    "customerId": "3",
+    "customerName": "Customer 3",
+    "orderType": 0,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 103,
+    "prnName": "Printer 3",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 3-1",
+        "count": {
+          "$numberDecimal": "4.5"
+        },
+        "price": {
+          "$numberDecimal": "13"
+        },
+        "canceled": false,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 3",
+        "portionId": 3,
+        "portionName": "Portion 3",
+        "tmOrder": "2023-07-15T12:11:00.000Z",
+        "alias": "Alias 3-1",
+        "_id": "64e1f3f19d8dc796e4b08b99"
+      },
+      {
+        "description": "Item 3-2",
+        "count": {
+          "$numberDecimal": "1.5"
+        },
+        "price": {
+          "$numberDecimal": "8"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 3",
+        "portionId": 3,
+        "portionName": "Portion 3",
+        "tmOrder": "2023-07-15T12:13:00.000Z",
+        "alias": "Alias 3-2",
+        "_id": "64e1f3f19d8dc796e4b08b9a"
+      }
+    ],
+    "servingId": 1003,
+    "tmOpen": "2023-07-15T12:11:00.000Z",
+    "servingName": "Serving 3",
+    "priceList": "List 3",
+    "future": false,
+    "gst": 3
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08b9b",
+    "dealId": "6787740163",
+    "tblNo": 4,
+    "customerId": "4",
+    "customerName": "Customer 4",
+    "orderType": 1,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 104,
+    "prnName": "Printer 4",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 4-1",
+        "count": {
+          "$numberDecimal": "6"
+        },
+        "price": {
+          "$numberDecimal": "14"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 4",
+        "portionId": 4,
+        "portionName": "Portion 4",
+        "tmOrder": "2023-07-15T12:11:00.000Z",
+        "alias": "Alias 4-1",
+        "_id": "64e1f3f19d8dc796e4b08b9c"
+      },
+      {
+        "description": "Item 4-2",
+        "count": {
+          "$numberDecimal": "2"
+        },
+        "price": {
+          "$numberDecimal": "9"
+        },
+        "canceled": false,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 4",
+        "portionId": 4,
+        "portionName": "Portion 4",
+        "tmOrder": "2023-07-15T12:14:00.000Z",
+        "alias": "Alias 4-2",
+        "_id": "64e1f3f19d8dc796e4b08b9d"
+      }
+    ],
+    "servingId": 1004,
+    "tmOpen": "2023-07-15T12:11:00.000Z",
+    "servingName": "Serving 4",
+    "priceList": "List 4",
+    "future": true,
+    "gst": 4
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08b9e",
+    "dealId": "3977288623",
+    "tblNo": 5,
+    "customerId": "5",
+    "customerName": "Customer 5",
+    "orderType": 2,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 105,
+    "prnName": "Printer 5",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 5-1",
+        "count": {
+          "$numberDecimal": "7.5"
+        },
+        "price": {
+          "$numberDecimal": "15"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 5",
+        "portionId": 5,
+        "portionName": "Portion 5",
+        "tmOrder": "2023-07-15T12:11:00.000Z",
+        "alias": "Alias 5-1",
+        "_id": "64e1f3f19d8dc796e4b08b9f"
+      },
+      {
+        "description": "Item 5-2",
+        "count": {
+          "$numberDecimal": "2.5"
+        },
+        "price": {
+          "$numberDecimal": "10"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 5",
+        "portionId": 5,
+        "portionName": "Portion 5",
+        "tmOrder": "2023-07-15T12:15:00.000Z",
+        "alias": "Alias 5-2",
+        "_id": "64e1f3f19d8dc796e4b08ba0"
+      }
+    ],
+    "servingId": 1005,
+    "tmOpen": "2023-07-15T12:11:00.000Z",
+    "servingName": "Serving 5",
+    "priceList": "List 5",
+    "future": false,
+    "gst": 5
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08ba1",
+    "dealId": "7907681923",
+    "tblNo": 6,
+    "customerId": "6",
+    "customerName": "Customer 6",
+    "orderType": 0,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 106,
+    "prnName": "Printer 6",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 6-1",
+        "count": {
+          "$numberDecimal": "9"
+        },
+        "price": {
+          "$numberDecimal": "16"
+        },
+        "canceled": true,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 6",
+        "portionId": 6,
+        "portionName": "Portion 6",
+        "tmOrder": "2023-07-15T12:11:00.000Z",
+        "alias": "Alias 6-1",
+        "_id": "64e1f3f19d8dc796e4b08ba2"
+      },
+      {
+        "description": "Item 6-2",
+        "count": {
+          "$numberDecimal": "3"
+        },
+        "price": {
+          "$numberDecimal": "11"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 6",
+        "portionId": 6,
+        "portionName": "Portion 6",
+        "tmOrder": "2023-07-15T12:16:00.000Z",
+        "alias": "Alias 6-2",
+        "_id": "64e1f3f19d8dc796e4b08ba3"
+      }
+    ],
+    "servingId": 1006,
+    "tmOpen": "2023-07-15T12:11:00.000Z",
+    "servingName": "Serving 6",
+    "priceList": "List 6",
+    "future": true,
+    "gst": 6
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08ba4",
+    "dealId": "5971038942",
+    "tblNo": 7,
+    "customerId": "7",
+    "customerName": "Customer 7",
+    "orderType": 1,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 107,
+    "prnName": "Printer 7",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 7-1",
+        "count": {
+          "$numberDecimal": "10.5"
+        },
+        "price": {
+          "$numberDecimal": "17"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 7",
+        "portionId": 7,
+        "portionName": "Portion 7",
+        "tmOrder": "2023-07-15T12:11:00.000Z",
+        "alias": "Alias 7-1",
+        "_id": "64e1f3f19d8dc796e4b08ba5"
+      },
+      {
+        "description": "Item 7-2",
+        "count": {
+          "$numberDecimal": "3.5"
+        },
+        "price": {
+          "$numberDecimal": "12"
+        },
+        "canceled": true,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 7",
+        "portionId": 7,
+        "portionName": "Portion 7",
+        "tmOrder": "2023-07-15T12:17:00.000Z",
+        "alias": "Alias 7-2",
+        "_id": "64e1f3f19d8dc796e4b08ba6"
+      }
+    ],
+    "servingId": 1007,
+    "tmOpen": "2023-07-15T12:11:00.000Z",
+    "servingName": "Serving 7",
+    "priceList": "List 7",
+    "future": false,
+    "gst": 7
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08ba7",
+    "dealId": "4543034149",
+    "tblNo": 8,
+    "customerId": "8",
+    "customerName": "Customer 8",
+    "orderType": 2,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 108,
+    "prnName": "Printer 8",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 8-1",
+        "count": {
+          "$numberDecimal": "12"
+        },
+        "price": {
+          "$numberDecimal": "18"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 8",
+        "portionId": 8,
+        "portionName": "Portion 8",
+        "tmOrder": "2023-07-15T12:11:00.000Z",
+        "alias": "Alias 8-1",
+        "_id": "64e1f3f19d8dc796e4b08ba8"
+      },
+      {
+        "description": "Item 8-2",
+        "count": {
+          "$numberDecimal": "4"
+        },
+        "price": {
+          "$numberDecimal": "13"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 8",
+        "portionId": 8,
+        "portionName": "Portion 8",
+        "tmOrder": "2023-07-15T12:18:00.000Z",
+        "alias": "Alias 8-2",
+        "_id": "64e1f3f19d8dc796e4b08ba9"
+      }
+    ],
+    "servingId": 1008,
+    "tmOpen": "2023-07-15T12:11:00.000Z",
+    "servingName": "Serving 8",
+    "priceList": "List 8",
+    "future": true,
+    "gst": 8
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08baa",
+    "dealId": "5957986538",
+    "tblNo": 9,
+    "customerId": "9",
+    "customerName": "Customer 9",
+    "orderType": 0,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 109,
+    "prnName": "Printer 9",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 9-1",
+        "count": {
+          "$numberDecimal": "13.5"
+        },
+        "price": {
+          "$numberDecimal": "19"
+        },
+        "canceled": false,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 9",
+        "portionId": 9,
+        "portionName": "Portion 9",
+        "tmOrder": "2023-07-15T12:11:00.000Z",
+        "alias": "Alias 9-1",
+        "_id": "64e1f3f19d8dc796e4b08bab"
+      },
+      {
+        "description": "Item 9-2",
+        "count": {
+          "$numberDecimal": "4.5"
+        },
+        "price": {
+          "$numberDecimal": "14"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 9",
+        "portionId": 9,
+        "portionName": "Portion 9",
+        "tmOrder": "2023-07-15T12:19:00.000Z",
+        "alias": "Alias 9-2",
+        "_id": "64e1f3f19d8dc796e4b08bac"
+      }
+    ],
+    "servingId": 1009,
+    "tmOpen": "2023-07-15T12:11:00.000Z",
+    "servingName": "Serving 9",
+    "priceList": "List 9",
+    "future": false,
+    "gst": 9
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08bad",
+    "dealId": "8071013349",
+    "tblNo": 10,
+    "customerId": "10",
+    "customerName": "Customer 10",
+    "orderType": 1,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 110,
+    "prnName": "Printer 10",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 10-1",
+        "count": {
+          "$numberDecimal": "15"
+        },
+        "price": {
+          "$numberDecimal": "20"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 10",
+        "portionId": 10,
+        "portionName": "Portion 10",
+        "tmOrder": "2023-07-15T12:10:00.000Z",
+        "alias": "Alias 10-1",
+        "_id": "64e1f3f19d8dc796e4b08bae"
+      },
+      {
+        "description": "Item 10-2",
+        "count": {
+          "$numberDecimal": "5"
+        },
+        "price": {
+          "$numberDecimal": "15"
+        },
+        "canceled": false,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 10",
+        "portionId": 10,
+        "portionName": "Portion 10",
+        "tmOrder": "2023-07-15T12:20:00.000Z",
+        "alias": "Alias 10-2",
+        "_id": "64e1f3f19d8dc796e4b08baf"
+      }
+    ],
+    "servingId": 1010,
+    "tmOpen": "2023-07-15T10:10:00.000Z",
+    "servingName": "Serving 10",
+    "priceList": "List 10",
+    "future": true,
+    "gst": 0
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08bb0",
+    "dealId": "7806517923",
+    "tblNo": 11,
+    "customerId": "11",
+    "customerName": "Customer 11",
+    "orderType": 2,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 111,
+    "prnName": "Printer 11",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 11-1",
+        "count": {
+          "$numberDecimal": "16.5"
+        },
+        "price": {
+          "$numberDecimal": "21"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 11",
+        "portionId": 11,
+        "portionName": "Portion 11",
+        "tmOrder": "2023-07-15T12:11:00.000Z",
+        "alias": "Alias 11-1",
+        "_id": "64e1f3f19d8dc796e4b08bb1"
+      },
+      {
+        "description": "Item 11-2",
+        "count": {
+          "$numberDecimal": "5.5"
+        },
+        "price": {
+          "$numberDecimal": "16"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 11",
+        "portionId": 11,
+        "portionName": "Portion 11",
+        "tmOrder": "2023-07-15T12:21:00.000Z",
+        "alias": "Alias 11-2",
+        "_id": "64e1f3f19d8dc796e4b08bb2"
+      }
+    ],
+    "servingId": 1011,
+    "tmOpen": "2023-07-15T10:11:00.000Z",
+    "servingName": "Serving 11",
+    "priceList": "List 11",
+    "future": false,
+    "gst": 1
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08bb3",
+    "dealId": "4692531041",
+    "tblNo": 12,
+    "customerId": "12",
+    "customerName": "Customer 12",
+    "orderType": 0,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 112,
+    "prnName": "Printer 12",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 12-1",
+        "count": {
+          "$numberDecimal": "18"
+        },
+        "price": {
+          "$numberDecimal": "22"
+        },
+        "canceled": true,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 12",
+        "portionId": 12,
+        "portionName": "Portion 12",
+        "tmOrder": "2023-07-15T12:12:00.000Z",
+        "alias": "Alias 12-1",
+        "_id": "64e1f3f19d8dc796e4b08bb4"
+      },
+      {
+        "description": "Item 12-2",
+        "count": {
+          "$numberDecimal": "6"
+        },
+        "price": {
+          "$numberDecimal": "17"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 12",
+        "portionId": 12,
+        "portionName": "Portion 12",
+        "tmOrder": "2023-07-15T12:22:00.000Z",
+        "alias": "Alias 12-2",
+        "_id": "64e1f3f19d8dc796e4b08bb5"
+      }
+    ],
+    "servingId": 1012,
+    "tmOpen": "2023-07-15T10:12:00.000Z",
+    "servingName": "Serving 12",
+    "priceList": "List 12",
+    "future": true,
+    "gst": 2
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08bb6",
+    "dealId": "3224342624",
+    "tblNo": 13,
+    "customerId": "13",
+    "customerName": "Customer 13",
+    "orderType": 1,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 113,
+    "prnName": "Printer 13",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 13-1",
+        "count": {
+          "$numberDecimal": "19.5"
+        },
+        "price": {
+          "$numberDecimal": "23"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 13",
+        "portionId": 13,
+        "portionName": "Portion 13",
+        "tmOrder": "2023-07-15T12:13:00.000Z",
+        "alias": "Alias 13-1",
+        "_id": "64e1f3f19d8dc796e4b08bb7"
+      },
+      {
+        "description": "Item 13-2",
+        "count": {
+          "$numberDecimal": "6.5"
+        },
+        "price": {
+          "$numberDecimal": "18"
+        },
+        "canceled": true,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 13",
+        "portionId": 13,
+        "portionName": "Portion 13",
+        "tmOrder": "2023-07-15T12:23:00.000Z",
+        "alias": "Alias 13-2",
+        "_id": "64e1f3f19d8dc796e4b08bb8"
+      }
+    ],
+    "servingId": 1013,
+    "tmOpen": "2023-07-15T10:13:00.000Z",
+    "servingName": "Serving 13",
+    "priceList": "List 13",
+    "future": false,
+    "gst": 3
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08bb9",
+    "dealId": "6561324125",
+    "tblNo": 14,
+    "customerId": "14",
+    "customerName": "Customer 14",
+    "orderType": 2,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 114,
+    "prnName": "Printer 14",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 14-1",
+        "count": {
+          "$numberDecimal": "21"
+        },
+        "price": {
+          "$numberDecimal": "24"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 14",
+        "portionId": 14,
+        "portionName": "Portion 14",
+        "tmOrder": "2023-07-15T12:14:00.000Z",
+        "alias": "Alias 14-1",
+        "_id": "64e1f3f19d8dc796e4b08bba"
+      },
+      {
+        "description": "Item 14-2",
+        "count": {
+          "$numberDecimal": "7"
+        },
+        "price": {
+          "$numberDecimal": "19"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 14",
+        "portionId": 14,
+        "portionName": "Portion 14",
+        "tmOrder": "2023-07-15T12:24:00.000Z",
+        "alias": "Alias 14-2",
+        "_id": "64e1f3f19d8dc796e4b08bbb"
+      }
+    ],
+    "servingId": 1014,
+    "tmOpen": "2023-07-15T10:14:00.000Z",
+    "servingName": "Serving 14",
+    "priceList": "List 14",
+    "future": true,
+    "gst": 4
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08bbc",
+    "dealId": "2689085258",
+    "tblNo": 15,
+    "customerId": "15",
+    "customerName": "Customer 15",
+    "orderType": 0,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 115,
+    "prnName": "Printer 15",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 15-1",
+        "count": {
+          "$numberDecimal": "22.5"
+        },
+        "price": {
+          "$numberDecimal": "25"
+        },
+        "canceled": false,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 15",
+        "portionId": 15,
+        "portionName": "Portion 15",
+        "tmOrder": "2023-07-15T12:15:00.000Z",
+        "alias": "Alias 15-1",
+        "_id": "64e1f3f19d8dc796e4b08bbd"
+      },
+      {
+        "description": "Item 15-2",
+        "count": {
+          "$numberDecimal": "7.5"
+        },
+        "price": {
+          "$numberDecimal": "20"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 15",
+        "portionId": 15,
+        "portionName": "Portion 15",
+        "tmOrder": "2023-07-15T12:25:00.000Z",
+        "alias": "Alias 15-2",
+        "_id": "64e1f3f19d8dc796e4b08bbe"
+      }
+    ],
+    "servingId": 1015,
+    "tmOpen": "2023-07-15T10:15:00.000Z",
+    "servingName": "Serving 15",
+    "priceList": "List 15",
+    "future": false,
+    "gst": 5
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08bbf",
+    "dealId": "6599640457",
+    "tblNo": 16,
+    "customerId": "16",
+    "customerName": "Customer 16",
+    "orderType": 1,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 116,
+    "prnName": "Printer 16",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 16-1",
+        "count": {
+          "$numberDecimal": "24"
+        },
+        "price": {
+          "$numberDecimal": "26"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 16",
+        "portionId": 16,
+        "portionName": "Portion 16",
+        "tmOrder": "2023-07-15T12:16:00.000Z",
+        "alias": "Alias 16-1",
+        "_id": "64e1f3f19d8dc796e4b08bc0"
+      },
+      {
+        "description": "Item 16-2",
+        "count": {
+          "$numberDecimal": "8"
+        },
+        "price": {
+          "$numberDecimal": "21"
+        },
+        "canceled": false,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 16",
+        "portionId": 16,
+        "portionName": "Portion 16",
+        "tmOrder": "2023-07-15T12:26:00.000Z",
+        "alias": "Alias 16-2",
+        "_id": "64e1f3f19d8dc796e4b08bc1"
+      }
+    ],
+    "servingId": 1016,
+    "tmOpen": "2023-07-15T10:16:00.000Z",
+    "servingName": "Serving 16",
+    "priceList": "List 16",
+    "future": true,
+    "gst": 6
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08bc2",
+    "dealId": "9838455195",
+    "tblNo": 17,
+    "customerId": "17",
+    "customerName": "Customer 17",
+    "orderType": 2,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 117,
+    "prnName": "Printer 17",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 17-1",
+        "count": {
+          "$numberDecimal": "25.5"
+        },
+        "price": {
+          "$numberDecimal": "27"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 17",
+        "portionId": 17,
+        "portionName": "Portion 17",
+        "tmOrder": "2023-07-15T12:17:00.000Z",
+        "alias": "Alias 17-1",
+        "_id": "64e1f3f19d8dc796e4b08bc3"
+      },
+      {
+        "description": "Item 17-2",
+        "count": {
+          "$numberDecimal": "8.5"
+        },
+        "price": {
+          "$numberDecimal": "22"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 17",
+        "portionId": 17,
+        "portionName": "Portion 17",
+        "tmOrder": "2023-07-15T12:27:00.000Z",
+        "alias": "Alias 17-2",
+        "_id": "64e1f3f19d8dc796e4b08bc4"
+      }
+    ],
+    "servingId": 1017,
+    "tmOpen": "2023-07-15T10:17:00.000Z",
+    "servingName": "Serving 17",
+    "priceList": "List 17",
+    "future": false,
+    "gst": 7
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08bc5",
+    "dealId": "9261578801",
+    "tblNo": 18,
+    "customerId": "18",
+    "customerName": "Customer 18",
+    "orderType": 0,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 118,
+    "prnName": "Printer 18",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 18-1",
+        "count": {
+          "$numberDecimal": "27"
+        },
+        "price": {
+          "$numberDecimal": "28"
+        },
+        "canceled": true,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 18",
+        "portionId": 18,
+        "portionName": "Portion 18",
+        "tmOrder": "2023-07-15T12:18:00.000Z",
+        "alias": "Alias 18-1",
+        "_id": "64e1f3f19d8dc796e4b08bc6"
+      },
+      {
+        "description": "Item 18-2",
+        "count": {
+          "$numberDecimal": "9"
+        },
+        "price": {
+          "$numberDecimal": "23"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 18",
+        "portionId": 18,
+        "portionName": "Portion 18",
+        "tmOrder": "2023-07-15T12:28:00.000Z",
+        "alias": "Alias 18-2",
+        "_id": "64e1f3f19d8dc796e4b08bc7"
+      }
+    ],
+    "servingId": 1018,
+    "tmOpen": "2023-07-15T10:18:00.000Z",
+    "servingName": "Serving 18",
+    "priceList": "List 18",
+    "future": true,
+    "gst": 8
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08bc8",
+    "dealId": "7422197208",
+    "tblNo": 19,
+    "customerId": "19",
+    "customerName": "Customer 19",
+    "orderType": 1,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 119,
+    "prnName": "Printer 19",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 19-1",
+        "count": {
+          "$numberDecimal": "28.5"
+        },
+        "price": {
+          "$numberDecimal": "29"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 19",
+        "portionId": 19,
+        "portionName": "Portion 19",
+        "tmOrder": "2023-07-15T12:19:00.000Z",
+        "alias": "Alias 19-1",
+        "_id": "64e1f3f19d8dc796e4b08bc9"
+      },
+      {
+        "description": "Item 19-2",
+        "count": {
+          "$numberDecimal": "9.5"
+        },
+        "price": {
+          "$numberDecimal": "24"
+        },
+        "canceled": true,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 19",
+        "portionId": 19,
+        "portionName": "Portion 19",
+        "tmOrder": "2023-07-15T12:29:00.000Z",
+        "alias": "Alias 19-2",
+        "_id": "64e1f3f19d8dc796e4b08bca"
+      }
+    ],
+    "servingId": 1019,
+    "tmOpen": "2023-07-15T10:19:00.000Z",
+    "servingName": "Serving 19",
+    "priceList": "List 19",
+    "future": false,
+    "gst": 9
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08bcb",
+    "dealId": "3670748571",
+    "tblNo": 20,
+    "customerId": "20",
+    "customerName": "Customer 20",
+    "orderType": 2,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 120,
+    "prnName": "Printer 20",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 20-1",
+        "count": {
+          "$numberDecimal": "30"
+        },
+        "price": {
+          "$numberDecimal": "30"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 20",
+        "portionId": 20,
+        "portionName": "Portion 20",
+        "tmOrder": "2023-07-15T12:20:00.000Z",
+        "alias": "Alias 20-1",
+        "_id": "64e1f3f19d8dc796e4b08bcc"
+      },
+      {
+        "description": "Item 20-2",
+        "count": {
+          "$numberDecimal": "10"
+        },
+        "price": {
+          "$numberDecimal": "25"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 20",
+        "portionId": 20,
+        "portionName": "Portion 20",
+        "tmOrder": "2023-07-15T12:30:00.000Z",
+        "alias": "Alias 20-2",
+        "_id": "64e1f3f19d8dc796e4b08bcd"
+      }
+    ],
+    "servingId": 1020,
+    "tmOpen": "2023-07-15T10:20:00.000Z",
+    "servingName": "Serving 20",
+    "priceList": "List 20",
+    "future": true,
+    "gst": 0
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08bce",
+    "dealId": "3073394539",
+    "tblNo": 21,
+    "customerId": "21",
+    "customerName": "Customer 21",
+    "orderType": 0,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 121,
+    "prnName": "Printer 21",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 21-1",
+        "count": {
+          "$numberDecimal": "31.5"
+        },
+        "price": {
+          "$numberDecimal": "31"
+        },
+        "canceled": false,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 21",
+        "portionId": 21,
+        "portionName": "Portion 21",
+        "tmOrder": "2023-07-15T12:21:00.000Z",
+        "alias": "Alias 21-1",
+        "_id": "64e1f3f19d8dc796e4b08bcf"
+      },
+      {
+        "description": "Item 21-2",
+        "count": {
+          "$numberDecimal": "10.5"
+        },
+        "price": {
+          "$numberDecimal": "26"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 21",
+        "portionId": 21,
+        "portionName": "Portion 21",
+        "tmOrder": "2023-07-15T12:31:00.000Z",
+        "alias": "Alias 21-2",
+        "_id": "64e1f3f19d8dc796e4b08bd0"
+      }
+    ],
+    "servingId": 1021,
+    "tmOpen": "2023-07-15T10:21:00.000Z",
+    "servingName": "Serving 21",
+    "priceList": "List 21",
+    "future": false,
+    "gst": 1
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08bd1",
+    "dealId": "3215862243",
+    "tblNo": 22,
+    "customerId": "22",
+    "customerName": "Customer 22",
+    "orderType": 1,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 122,
+    "prnName": "Printer 22",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 22-1",
+        "count": {
+          "$numberDecimal": "33"
+        },
+        "price": {
+          "$numberDecimal": "32"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 22",
+        "portionId": 22,
+        "portionName": "Portion 22",
+        "tmOrder": "2023-07-15T12:22:00.000Z",
+        "alias": "Alias 22-1",
+        "_id": "64e1f3f19d8dc796e4b08bd2"
+      },
+      {
+        "description": "Item 22-2",
+        "count": {
+          "$numberDecimal": "11"
+        },
+        "price": {
+          "$numberDecimal": "27"
+        },
+        "canceled": false,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 22",
+        "portionId": 22,
+        "portionName": "Portion 22",
+        "tmOrder": "2023-07-15T12:32:00.000Z",
+        "alias": "Alias 22-2",
+        "_id": "64e1f3f19d8dc796e4b08bd3"
+      }
+    ],
+    "servingId": 1022,
+    "tmOpen": "2023-07-15T10:22:00.000Z",
+    "servingName": "Serving 22",
+    "priceList": "List 22",
+    "future": true,
+    "gst": 2
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08bd4",
+    "dealId": "8459226295",
+    "tblNo": 23,
+    "customerId": "23",
+    "customerName": "Customer 23",
+    "orderType": 2,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 123,
+    "prnName": "Printer 23",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 23-1",
+        "count": {
+          "$numberDecimal": "34.5"
+        },
+        "price": {
+          "$numberDecimal": "33"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 23",
+        "portionId": 23,
+        "portionName": "Portion 23",
+        "tmOrder": "2023-07-15T12:23:00.000Z",
+        "alias": "Alias 23-1",
+        "_id": "64e1f3f19d8dc796e4b08bd5"
+      },
+      {
+        "description": "Item 23-2",
+        "count": {
+          "$numberDecimal": "11.5"
+        },
+        "price": {
+          "$numberDecimal": "28"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 23",
+        "portionId": 23,
+        "portionName": "Portion 23",
+        "tmOrder": "2023-07-15T12:33:00.000Z",
+        "alias": "Alias 23-2",
+        "_id": "64e1f3f19d8dc796e4b08bd6"
+      }
+    ],
+    "servingId": 1023,
+    "tmOpen": "2023-07-15T10:23:00.000Z",
+    "servingName": "Serving 23",
+    "priceList": "List 23",
+    "future": false,
+    "gst": 3
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08bd7",
+    "dealId": "4544431455",
+    "tblNo": 24,
+    "customerId": "24",
+    "customerName": "Customer 24",
+    "orderType": 0,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 124,
+    "prnName": "Printer 24",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 24-1",
+        "count": {
+          "$numberDecimal": "36"
+        },
+        "price": {
+          "$numberDecimal": "34"
+        },
+        "canceled": true,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 24",
+        "portionId": 24,
+        "portionName": "Portion 24",
+        "tmOrder": "2023-07-15T12:24:00.000Z",
+        "alias": "Alias 24-1",
+        "_id": "64e1f3f19d8dc796e4b08bd8"
+      },
+      {
+        "description": "Item 24-2",
+        "count": {
+          "$numberDecimal": "12"
+        },
+        "price": {
+          "$numberDecimal": "29"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 24",
+        "portionId": 24,
+        "portionName": "Portion 24",
+        "tmOrder": "2023-07-15T12:34:00.000Z",
+        "alias": "Alias 24-2",
+        "_id": "64e1f3f19d8dc796e4b08bd9"
+      }
+    ],
+    "servingId": 1024,
+    "tmOpen": "2023-07-15T10:24:00.000Z",
+    "servingName": "Serving 24",
+    "priceList": "List 24",
+    "future": true,
+    "gst": 4
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08bda",
+    "dealId": "5481591259",
+    "tblNo": 25,
+    "customerId": "25",
+    "customerName": "Customer 25",
+    "orderType": 1,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 125,
+    "prnName": "Printer 25",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 25-1",
+        "count": {
+          "$numberDecimal": "37.5"
+        },
+        "price": {
+          "$numberDecimal": "35"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 25",
+        "portionId": 25,
+        "portionName": "Portion 25",
+        "tmOrder": "2023-07-15T12:25:00.000Z",
+        "alias": "Alias 25-1",
+        "_id": "64e1f3f19d8dc796e4b08bdb"
+      },
+      {
+        "description": "Item 25-2",
+        "count": {
+          "$numberDecimal": "12.5"
+        },
+        "price": {
+          "$numberDecimal": "30"
+        },
+        "canceled": true,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 25",
+        "portionId": 25,
+        "portionName": "Portion 25",
+        "tmOrder": "2023-07-15T12:35:00.000Z",
+        "alias": "Alias 25-2",
+        "_id": "64e1f3f19d8dc796e4b08bdc"
+      }
+    ],
+    "servingId": 1025,
+    "tmOpen": "2023-07-15T10:25:00.000Z",
+    "servingName": "Serving 25",
+    "priceList": "List 25",
+    "future": false,
+    "gst": 5
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08bdd",
+    "dealId": "5579602171",
+    "tblNo": 26,
+    "customerId": "26",
+    "customerName": "Customer 26",
+    "orderType": 2,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 126,
+    "prnName": "Printer 26",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 26-1",
+        "count": {
+          "$numberDecimal": "39"
+        },
+        "price": {
+          "$numberDecimal": "36"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 26",
+        "portionId": 26,
+        "portionName": "Portion 26",
+        "tmOrder": "2023-07-15T12:26:00.000Z",
+        "alias": "Alias 26-1",
+        "_id": "64e1f3f19d8dc796e4b08bde"
+      },
+      {
+        "description": "Item 26-2",
+        "count": {
+          "$numberDecimal": "13"
+        },
+        "price": {
+          "$numberDecimal": "31"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 26",
+        "portionId": 26,
+        "portionName": "Portion 26",
+        "tmOrder": "2023-07-15T12:36:00.000Z",
+        "alias": "Alias 26-2",
+        "_id": "64e1f3f19d8dc796e4b08bdf"
+      }
+    ],
+    "servingId": 1026,
+    "tmOpen": "2023-07-15T10:26:00.000Z",
+    "servingName": "Serving 26",
+    "priceList": "List 26",
+    "future": true,
+    "gst": 6
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08be0",
+    "dealId": "1700827884",
+    "tblNo": 27,
+    "customerId": "27",
+    "customerName": "Customer 27",
+    "orderType": 0,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 127,
+    "prnName": "Printer 27",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 27-1",
+        "count": {
+          "$numberDecimal": "40.5"
+        },
+        "price": {
+          "$numberDecimal": "37"
+        },
+        "canceled": false,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 27",
+        "portionId": 27,
+        "portionName": "Portion 27",
+        "tmOrder": "2023-07-15T12:27:00.000Z",
+        "alias": "Alias 27-1",
+        "_id": "64e1f3f19d8dc796e4b08be1"
+      },
+      {
+        "description": "Item 27-2",
+        "count": {
+          "$numberDecimal": "13.5"
+        },
+        "price": {
+          "$numberDecimal": "32"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 27",
+        "portionId": 27,
+        "portionName": "Portion 27",
+        "tmOrder": "2023-07-15T12:37:00.000Z",
+        "alias": "Alias 27-2",
+        "_id": "64e1f3f19d8dc796e4b08be2"
+      }
+    ],
+    "servingId": 1027,
+    "tmOpen": "2023-07-15T10:27:00.000Z",
+    "servingName": "Serving 27",
+    "priceList": "List 27",
+    "future": false,
+    "gst": 7
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08be3",
+    "dealId": "6144688265",
+    "tblNo": 28,
+    "customerId": "28",
+    "customerName": "Customer 28",
+    "orderType": 1,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 128,
+    "prnName": "Printer 28",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 28-1",
+        "count": {
+          "$numberDecimal": "42"
+        },
+        "price": {
+          "$numberDecimal": "38"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 28",
+        "portionId": 28,
+        "portionName": "Portion 28",
+        "tmOrder": "2023-07-15T12:28:00.000Z",
+        "alias": "Alias 28-1",
+        "_id": "64e1f3f19d8dc796e4b08be4"
+      },
+      {
+        "description": "Item 28-2",
+        "count": {
+          "$numberDecimal": "14"
+        },
+        "price": {
+          "$numberDecimal": "33"
+        },
+        "canceled": false,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 28",
+        "portionId": 28,
+        "portionName": "Portion 28",
+        "tmOrder": "2023-07-15T12:38:00.000Z",
+        "alias": "Alias 28-2",
+        "_id": "64e1f3f19d8dc796e4b08be5"
+      }
+    ],
+    "servingId": 1028,
+    "tmOpen": "2023-07-15T10:28:00.000Z",
+    "servingName": "Serving 28",
+    "priceList": "List 28",
+    "future": true,
+    "gst": 8
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08be6",
+    "dealId": "1201293902",
+    "tblNo": 29,
+    "customerId": "29",
+    "customerName": "Customer 29",
+    "orderType": 2,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 129,
+    "prnName": "Printer 29",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 29-1",
+        "count": {
+          "$numberDecimal": "43.5"
+        },
+        "price": {
+          "$numberDecimal": "39"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 29",
+        "portionId": 29,
+        "portionName": "Portion 29",
+        "tmOrder": "2023-07-15T12:29:00.000Z",
+        "alias": "Alias 29-1",
+        "_id": "64e1f3f19d8dc796e4b08be7"
+      },
+      {
+        "description": "Item 29-2",
+        "count": {
+          "$numberDecimal": "14.5"
+        },
+        "price": {
+          "$numberDecimal": "34"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 29",
+        "portionId": 29,
+        "portionName": "Portion 29",
+        "tmOrder": "2023-07-15T12:39:00.000Z",
+        "alias": "Alias 29-2",
+        "_id": "64e1f3f19d8dc796e4b08be8"
+      }
+    ],
+    "servingId": 1029,
+    "tmOpen": "2023-07-15T10:29:00.000Z",
+    "servingName": "Serving 29",
+    "priceList": "List 29",
+    "future": false,
+    "gst": 9
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08be9",
+    "dealId": "7725535205",
+    "tblNo": 30,
+    "customerId": "30",
+    "customerName": "Customer 30",
+    "orderType": 0,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 130,
+    "prnName": "Printer 30",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 30-1",
+        "count": {
+          "$numberDecimal": "45"
+        },
+        "price": {
+          "$numberDecimal": "40"
+        },
+        "canceled": true,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 30",
+        "portionId": 30,
+        "portionName": "Portion 30",
+        "tmOrder": "2023-07-15T12:30:00.000Z",
+        "alias": "Alias 30-1",
+        "_id": "64e1f3f19d8dc796e4b08bea"
+      },
+      {
+        "description": "Item 30-2",
+        "count": {
+          "$numberDecimal": "15"
+        },
+        "price": {
+          "$numberDecimal": "35"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 30",
+        "portionId": 30,
+        "portionName": "Portion 30",
+        "tmOrder": "2023-07-15T12:40:00.000Z",
+        "alias": "Alias 30-2",
+        "_id": "64e1f3f19d8dc796e4b08beb"
+      }
+    ],
+    "servingId": 1030,
+    "tmOpen": "2023-07-15T10:30:00.000Z",
+    "servingName": "Serving 30",
+    "priceList": "List 30",
+    "future": true,
+    "gst": 0
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08bec",
+    "dealId": "8254399550",
+    "tblNo": 31,
+    "customerId": "31",
+    "customerName": "Customer 31",
+    "orderType": 1,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 131,
+    "prnName": "Printer 31",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 31-1",
+        "count": {
+          "$numberDecimal": "46.5"
+        },
+        "price": {
+          "$numberDecimal": "41"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 31",
+        "portionId": 31,
+        "portionName": "Portion 31",
+        "tmOrder": "2023-07-15T12:31:00.000Z",
+        "alias": "Alias 31-1",
+        "_id": "64e1f3f19d8dc796e4b08bed"
+      },
+      {
+        "description": "Item 31-2",
+        "count": {
+          "$numberDecimal": "15.5"
+        },
+        "price": {
+          "$numberDecimal": "36"
+        },
+        "canceled": true,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 31",
+        "portionId": 31,
+        "portionName": "Portion 31",
+        "tmOrder": "2023-07-15T12:41:00.000Z",
+        "alias": "Alias 31-2",
+        "_id": "64e1f3f19d8dc796e4b08bee"
+      }
+    ],
+    "servingId": 1031,
+    "tmOpen": "2023-07-15T10:31:00.000Z",
+    "servingName": "Serving 31",
+    "priceList": "List 31",
+    "future": false,
+    "gst": 1
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08bef",
+    "dealId": "7482562074",
+    "tblNo": 32,
+    "customerId": "32",
+    "customerName": "Customer 32",
+    "orderType": 2,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 132,
+    "prnName": "Printer 32",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 32-1",
+        "count": {
+          "$numberDecimal": "48"
+        },
+        "price": {
+          "$numberDecimal": "42"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 32",
+        "portionId": 32,
+        "portionName": "Portion 32",
+        "tmOrder": "2023-07-15T12:32:00.000Z",
+        "alias": "Alias 32-1",
+        "_id": "64e1f3f19d8dc796e4b08bf0"
+      },
+      {
+        "description": "Item 32-2",
+        "count": {
+          "$numberDecimal": "16"
+        },
+        "price": {
+          "$numberDecimal": "37"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 32",
+        "portionId": 32,
+        "portionName": "Portion 32",
+        "tmOrder": "2023-07-15T12:42:00.000Z",
+        "alias": "Alias 32-2",
+        "_id": "64e1f3f19d8dc796e4b08bf1"
+      }
+    ],
+    "servingId": 1032,
+    "tmOpen": "2023-07-15T10:32:00.000Z",
+    "servingName": "Serving 32",
+    "priceList": "List 32",
+    "future": true,
+    "gst": 2
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08bf2",
+    "dealId": "6695135305",
+    "tblNo": 33,
+    "customerId": "33",
+    "customerName": "Customer 33",
+    "orderType": 0,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 133,
+    "prnName": "Printer 33",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 33-1",
+        "count": {
+          "$numberDecimal": "49.5"
+        },
+        "price": {
+          "$numberDecimal": "43"
+        },
+        "canceled": false,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 33",
+        "portionId": 33,
+        "portionName": "Portion 33",
+        "tmOrder": "2023-07-15T12:33:00.000Z",
+        "alias": "Alias 33-1",
+        "_id": "64e1f3f19d8dc796e4b08bf3"
+      },
+      {
+        "description": "Item 33-2",
+        "count": {
+          "$numberDecimal": "16.5"
+        },
+        "price": {
+          "$numberDecimal": "38"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 33",
+        "portionId": 33,
+        "portionName": "Portion 33",
+        "tmOrder": "2023-07-15T12:43:00.000Z",
+        "alias": "Alias 33-2",
+        "_id": "64e1f3f19d8dc796e4b08bf4"
+      }
+    ],
+    "servingId": 1033,
+    "tmOpen": "2023-07-15T10:33:00.000Z",
+    "servingName": "Serving 33",
+    "priceList": "List 33",
+    "future": false,
+    "gst": 3
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08bf5",
+    "dealId": "1740842275",
+    "tblNo": 34,
+    "customerId": "34",
+    "customerName": "Customer 34",
+    "orderType": 1,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 134,
+    "prnName": "Printer 34",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 34-1",
+        "count": {
+          "$numberDecimal": "51"
+        },
+        "price": {
+          "$numberDecimal": "44"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 34",
+        "portionId": 34,
+        "portionName": "Portion 34",
+        "tmOrder": "2023-07-15T12:34:00.000Z",
+        "alias": "Alias 34-1",
+        "_id": "64e1f3f19d8dc796e4b08bf6"
+      },
+      {
+        "description": "Item 34-2",
+        "count": {
+          "$numberDecimal": "17"
+        },
+        "price": {
+          "$numberDecimal": "39"
+        },
+        "canceled": false,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 34",
+        "portionId": 34,
+        "portionName": "Portion 34",
+        "tmOrder": "2023-07-15T12:44:00.000Z",
+        "alias": "Alias 34-2",
+        "_id": "64e1f3f19d8dc796e4b08bf7"
+      }
+    ],
+    "servingId": 1034,
+    "tmOpen": "2023-07-15T10:34:00.000Z",
+    "servingName": "Serving 34",
+    "priceList": "List 34",
+    "future": true,
+    "gst": 4
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08bf8",
+    "dealId": "1970891734",
+    "tblNo": 35,
+    "customerId": "35",
+    "customerName": "Customer 35",
+    "orderType": 2,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 135,
+    "prnName": "Printer 35",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 35-1",
+        "count": {
+          "$numberDecimal": "52.5"
+        },
+        "price": {
+          "$numberDecimal": "45"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 35",
+        "portionId": 35,
+        "portionName": "Portion 35",
+        "tmOrder": "2023-07-15T12:35:00.000Z",
+        "alias": "Alias 35-1",
+        "_id": "64e1f3f19d8dc796e4b08bf9"
+      },
+      {
+        "description": "Item 35-2",
+        "count": {
+          "$numberDecimal": "17.5"
+        },
+        "price": {
+          "$numberDecimal": "40"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 35",
+        "portionId": 35,
+        "portionName": "Portion 35",
+        "tmOrder": "2023-07-15T12:45:00.000Z",
+        "alias": "Alias 35-2",
+        "_id": "64e1f3f19d8dc796e4b08bfa"
+      }
+    ],
+    "servingId": 1035,
+    "tmOpen": "2023-07-15T10:35:00.000Z",
+    "servingName": "Serving 35",
+    "priceList": "List 35",
+    "future": false,
+    "gst": 5
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08bfb",
+    "dealId": "8896062775",
+    "tblNo": 36,
+    "customerId": "36",
+    "customerName": "Customer 36",
+    "orderType": 0,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 136,
+    "prnName": "Printer 36",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 36-1",
+        "count": {
+          "$numberDecimal": "54"
+        },
+        "price": {
+          "$numberDecimal": "46"
+        },
+        "canceled": true,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 36",
+        "portionId": 36,
+        "portionName": "Portion 36",
+        "tmOrder": "2023-07-15T12:36:00.000Z",
+        "alias": "Alias 36-1",
+        "_id": "64e1f3f19d8dc796e4b08bfc"
+      },
+      {
+        "description": "Item 36-2",
+        "count": {
+          "$numberDecimal": "18"
+        },
+        "price": {
+          "$numberDecimal": "41"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 36",
+        "portionId": 36,
+        "portionName": "Portion 36",
+        "tmOrder": "2023-07-15T12:46:00.000Z",
+        "alias": "Alias 36-2",
+        "_id": "64e1f3f19d8dc796e4b08bfd"
+      }
+    ],
+    "servingId": 1036,
+    "tmOpen": "2023-07-15T10:36:00.000Z",
+    "servingName": "Serving 36",
+    "priceList": "List 36",
+    "future": true,
+    "gst": 6
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08bfe",
+    "dealId": "2417460373",
+    "tblNo": 37,
+    "customerId": "37",
+    "customerName": "Customer 37",
+    "orderType": 1,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 137,
+    "prnName": "Printer 37",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 37-1",
+        "count": {
+          "$numberDecimal": "55.5"
+        },
+        "price": {
+          "$numberDecimal": "47"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 37",
+        "portionId": 37,
+        "portionName": "Portion 37",
+        "tmOrder": "2023-07-15T12:37:00.000Z",
+        "alias": "Alias 37-1",
+        "_id": "64e1f3f19d8dc796e4b08bff"
+      },
+      {
+        "description": "Item 37-2",
+        "count": {
+          "$numberDecimal": "18.5"
+        },
+        "price": {
+          "$numberDecimal": "42"
+        },
+        "canceled": true,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 37",
+        "portionId": 37,
+        "portionName": "Portion 37",
+        "tmOrder": "2023-07-15T12:47:00.000Z",
+        "alias": "Alias 37-2",
+        "_id": "64e1f3f19d8dc796e4b08c00"
+      }
+    ],
+    "servingId": 1037,
+    "tmOpen": "2023-07-15T10:37:00.000Z",
+    "servingName": "Serving 37",
+    "priceList": "List 37",
+    "future": false,
+    "gst": 7
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08c01",
+    "dealId": "8923798139",
+    "tblNo": 38,
+    "customerId": "38",
+    "customerName": "Customer 38",
+    "orderType": 2,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 138,
+    "prnName": "Printer 38",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 38-1",
+        "count": {
+          "$numberDecimal": "57"
+        },
+        "price": {
+          "$numberDecimal": "48"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 38",
+        "portionId": 38,
+        "portionName": "Portion 38",
+        "tmOrder": "2023-07-15T12:38:00.000Z",
+        "alias": "Alias 38-1",
+        "_id": "64e1f3f19d8dc796e4b08c02"
+      },
+      {
+        "description": "Item 38-2",
+        "count": {
+          "$numberDecimal": "19"
+        },
+        "price": {
+          "$numberDecimal": "43"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 38",
+        "portionId": 38,
+        "portionName": "Portion 38",
+        "tmOrder": "2023-07-15T12:48:00.000Z",
+        "alias": "Alias 38-2",
+        "_id": "64e1f3f19d8dc796e4b08c03"
+      }
+    ],
+    "servingId": 1038,
+    "tmOpen": "2023-07-15T10:38:00.000Z",
+    "servingName": "Serving 38",
+    "priceList": "List 38",
+    "future": true,
+    "gst": 8
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08c04",
+    "dealId": "9688084028",
+    "tblNo": 39,
+    "customerId": "39",
+    "customerName": "Customer 39",
+    "orderType": 0,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 139,
+    "prnName": "Printer 39",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 39-1",
+        "count": {
+          "$numberDecimal": "58.5"
+        },
+        "price": {
+          "$numberDecimal": "49"
+        },
+        "canceled": false,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 39",
+        "portionId": 39,
+        "portionName": "Portion 39",
+        "tmOrder": "2023-07-15T12:39:00.000Z",
+        "alias": "Alias 39-1",
+        "_id": "64e1f3f19d8dc796e4b08c05"
+      },
+      {
+        "description": "Item 39-2",
+        "count": {
+          "$numberDecimal": "19.5"
+        },
+        "price": {
+          "$numberDecimal": "44"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 39",
+        "portionId": 39,
+        "portionName": "Portion 39",
+        "tmOrder": "2023-07-15T12:49:00.000Z",
+        "alias": "Alias 39-2",
+        "_id": "64e1f3f19d8dc796e4b08c06"
+      }
+    ],
+    "servingId": 1039,
+    "tmOpen": "2023-07-15T10:39:00.000Z",
+    "servingName": "Serving 39",
+    "priceList": "List 39",
+    "future": false,
+    "gst": 9
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08c07",
+    "dealId": "5149858401",
+    "tblNo": 40,
+    "customerId": "40",
+    "customerName": "Customer 40",
+    "orderType": 1,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 140,
+    "prnName": "Printer 40",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 40-1",
+        "count": {
+          "$numberDecimal": "60"
+        },
+        "price": {
+          "$numberDecimal": "50"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 40",
+        "portionId": 40,
+        "portionName": "Portion 40",
+        "tmOrder": "2023-07-15T12:40:00.000Z",
+        "alias": "Alias 40-1",
+        "_id": "64e1f3f19d8dc796e4b08c08"
+      },
+      {
+        "description": "Item 40-2",
+        "count": {
+          "$numberDecimal": "20"
+        },
+        "price": {
+          "$numberDecimal": "45"
+        },
+        "canceled": false,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 40",
+        "portionId": 40,
+        "portionName": "Portion 40",
+        "tmOrder": "2023-07-15T12:50:00.000Z",
+        "alias": "Alias 40-2",
+        "_id": "64e1f3f19d8dc796e4b08c09"
+      }
+    ],
+    "servingId": 1040,
+    "tmOpen": "2023-07-15T10:40:00.000Z",
+    "servingName": "Serving 40",
+    "priceList": "List 40",
+    "future": true,
+    "gst": 0
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08c0a",
+    "dealId": "9667729521",
+    "tblNo": 41,
+    "customerId": "41",
+    "customerName": "Customer 41",
+    "orderType": 2,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 141,
+    "prnName": "Printer 41",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 41-1",
+        "count": {
+          "$numberDecimal": "61.5"
+        },
+        "price": {
+          "$numberDecimal": "51"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 41",
+        "portionId": 41,
+        "portionName": "Portion 41",
+        "tmOrder": "2023-07-15T12:41:00.000Z",
+        "alias": "Alias 41-1",
+        "_id": "64e1f3f19d8dc796e4b08c0b"
+      },
+      {
+        "description": "Item 41-2",
+        "count": {
+          "$numberDecimal": "20.5"
+        },
+        "price": {
+          "$numberDecimal": "46"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 41",
+        "portionId": 41,
+        "portionName": "Portion 41",
+        "tmOrder": "2023-07-15T12:51:00.000Z",
+        "alias": "Alias 41-2",
+        "_id": "64e1f3f19d8dc796e4b08c0c"
+      }
+    ],
+    "servingId": 1041,
+    "tmOpen": "2023-07-15T10:41:00.000Z",
+    "servingName": "Serving 41",
+    "priceList": "List 41",
+    "future": false,
+    "gst": 1
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08c0d",
+    "dealId": "7581204545",
+    "tblNo": 42,
+    "customerId": "42",
+    "customerName": "Customer 42",
+    "orderType": 0,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 142,
+    "prnName": "Printer 42",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 42-1",
+        "count": {
+          "$numberDecimal": "63"
+        },
+        "price": {
+          "$numberDecimal": "52"
+        },
+        "canceled": true,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 42",
+        "portionId": 42,
+        "portionName": "Portion 42",
+        "tmOrder": "2023-07-15T12:42:00.000Z",
+        "alias": "Alias 42-1",
+        "_id": "64e1f3f19d8dc796e4b08c0e"
+      },
+      {
+        "description": "Item 42-2",
+        "count": {
+          "$numberDecimal": "21"
+        },
+        "price": {
+          "$numberDecimal": "47"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 42",
+        "portionId": 42,
+        "portionName": "Portion 42",
+        "tmOrder": "2023-07-15T12:52:00.000Z",
+        "alias": "Alias 42-2",
+        "_id": "64e1f3f19d8dc796e4b08c0f"
+      }
+    ],
+    "servingId": 1042,
+    "tmOpen": "2023-07-15T10:42:00.000Z",
+    "servingName": "Serving 42",
+    "priceList": "List 42",
+    "future": true,
+    "gst": 2
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08c10",
+    "dealId": "8512957137",
+    "tblNo": 43,
+    "customerId": "43",
+    "customerName": "Customer 43",
+    "orderType": 1,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 143,
+    "prnName": "Printer 43",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 43-1",
+        "count": {
+          "$numberDecimal": "64.5"
+        },
+        "price": {
+          "$numberDecimal": "53"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 43",
+        "portionId": 43,
+        "portionName": "Portion 43",
+        "tmOrder": "2023-07-15T12:43:00.000Z",
+        "alias": "Alias 43-1",
+        "_id": "64e1f3f19d8dc796e4b08c11"
+      },
+      {
+        "description": "Item 43-2",
+        "count": {
+          "$numberDecimal": "21.5"
+        },
+        "price": {
+          "$numberDecimal": "48"
+        },
+        "canceled": true,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 43",
+        "portionId": 43,
+        "portionName": "Portion 43",
+        "tmOrder": "2023-07-15T12:53:00.000Z",
+        "alias": "Alias 43-2",
+        "_id": "64e1f3f19d8dc796e4b08c12"
+      }
+    ],
+    "servingId": 1043,
+    "tmOpen": "2023-07-15T10:43:00.000Z",
+    "servingName": "Serving 43",
+    "priceList": "List 43",
+    "future": false,
+    "gst": 3
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08c13",
+    "dealId": "4816640743",
+    "tblNo": 44,
+    "customerId": "44",
+    "customerName": "Customer 44",
+    "orderType": 2,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 144,
+    "prnName": "Printer 44",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 44-1",
+        "count": {
+          "$numberDecimal": "66"
+        },
+        "price": {
+          "$numberDecimal": "54"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 44",
+        "portionId": 44,
+        "portionName": "Portion 44",
+        "tmOrder": "2023-07-15T12:44:00.000Z",
+        "alias": "Alias 44-1",
+        "_id": "64e1f3f19d8dc796e4b08c14"
+      },
+      {
+        "description": "Item 44-2",
+        "count": {
+          "$numberDecimal": "22"
+        },
+        "price": {
+          "$numberDecimal": "49"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 44",
+        "portionId": 44,
+        "portionName": "Portion 44",
+        "tmOrder": "2023-07-15T12:54:00.000Z",
+        "alias": "Alias 44-2",
+        "_id": "64e1f3f19d8dc796e4b08c15"
+      }
+    ],
+    "servingId": 1044,
+    "tmOpen": "2023-07-15T10:44:00.000Z",
+    "servingName": "Serving 44",
+    "priceList": "List 44",
+    "future": true,
+    "gst": 4
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08c16",
+    "dealId": "1672986266",
+    "tblNo": 45,
+    "customerId": "45",
+    "customerName": "Customer 45",
+    "orderType": 0,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 145,
+    "prnName": "Printer 45",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 45-1",
+        "count": {
+          "$numberDecimal": "67.5"
+        },
+        "price": {
+          "$numberDecimal": "55"
+        },
+        "canceled": false,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 45",
+        "portionId": 45,
+        "portionName": "Portion 45",
+        "tmOrder": "2023-07-15T12:45:00.000Z",
+        "alias": "Alias 45-1",
+        "_id": "64e1f3f19d8dc796e4b08c17"
+      },
+      {
+        "description": "Item 45-2",
+        "count": {
+          "$numberDecimal": "22.5"
+        },
+        "price": {
+          "$numberDecimal": "50"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 45",
+        "portionId": 45,
+        "portionName": "Portion 45",
+        "tmOrder": "2023-07-15T12:55:00.000Z",
+        "alias": "Alias 45-2",
+        "_id": "64e1f3f19d8dc796e4b08c18"
+      }
+    ],
+    "servingId": 1045,
+    "tmOpen": "2023-07-15T10:45:00.000Z",
+    "servingName": "Serving 45",
+    "priceList": "List 45",
+    "future": false,
+    "gst": 5
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08c19",
+    "dealId": "9251121430",
+    "tblNo": 46,
+    "customerId": "46",
+    "customerName": "Customer 46",
+    "orderType": 1,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 146,
+    "prnName": "Printer 46",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 46-1",
+        "count": {
+          "$numberDecimal": "69"
+        },
+        "price": {
+          "$numberDecimal": "56"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 46",
+        "portionId": 46,
+        "portionName": "Portion 46",
+        "tmOrder": "2023-07-15T12:46:00.000Z",
+        "alias": "Alias 46-1",
+        "_id": "64e1f3f19d8dc796e4b08c1a"
+      },
+      {
+        "description": "Item 46-2",
+        "count": {
+          "$numberDecimal": "23"
+        },
+        "price": {
+          "$numberDecimal": "51"
+        },
+        "canceled": false,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 46",
+        "portionId": 46,
+        "portionName": "Portion 46",
+        "tmOrder": "2023-07-15T12:56:00.000Z",
+        "alias": "Alias 46-2",
+        "_id": "64e1f3f19d8dc796e4b08c1b"
+      }
+    ],
+    "servingId": 1046,
+    "tmOpen": "2023-07-15T10:46:00.000Z",
+    "servingName": "Serving 46",
+    "priceList": "List 46",
+    "future": true,
+    "gst": 6
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08c1c",
+    "dealId": "7609752946",
+    "tblNo": 47,
+    "customerId": "47",
+    "customerName": "Customer 47",
+    "orderType": 2,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 147,
+    "prnName": "Printer 47",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 47-1",
+        "count": {
+          "$numberDecimal": "70.5"
+        },
+        "price": {
+          "$numberDecimal": "57"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 47",
+        "portionId": 47,
+        "portionName": "Portion 47",
+        "tmOrder": "2023-07-15T12:47:00.000Z",
+        "alias": "Alias 47-1",
+        "_id": "64e1f3f19d8dc796e4b08c1d"
+      },
+      {
+        "description": "Item 47-2",
+        "count": {
+          "$numberDecimal": "23.5"
+        },
+        "price": {
+          "$numberDecimal": "52"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 47",
+        "portionId": 47,
+        "portionName": "Portion 47",
+        "tmOrder": "2023-07-15T12:57:00.000Z",
+        "alias": "Alias 47-2",
+        "_id": "64e1f3f19d8dc796e4b08c1e"
+      }
+    ],
+    "servingId": 1047,
+    "tmOpen": "2023-07-15T10:47:00.000Z",
+    "servingName": "Serving 47",
+    "priceList": "List 47",
+    "future": false,
+    "gst": 7
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08c1f",
+    "dealId": "2207225216",
+    "tblNo": 48,
+    "customerId": "48",
+    "customerName": "Customer 48",
+    "orderType": 0,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 148,
+    "prnName": "Printer 48",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 48-1",
+        "count": {
+          "$numberDecimal": "72"
+        },
+        "price": {
+          "$numberDecimal": "58"
+        },
+        "canceled": true,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 48",
+        "portionId": 48,
+        "portionName": "Portion 48",
+        "tmOrder": "2023-07-15T12:48:00.000Z",
+        "alias": "Alias 48-1",
+        "_id": "64e1f3f19d8dc796e4b08c20"
+      },
+      {
+        "description": "Item 48-2",
+        "count": {
+          "$numberDecimal": "24"
+        },
+        "price": {
+          "$numberDecimal": "53"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 48",
+        "portionId": 48,
+        "portionName": "Portion 48",
+        "tmOrder": "2023-07-15T12:58:00.000Z",
+        "alias": "Alias 48-2",
+        "_id": "64e1f3f19d8dc796e4b08c21"
+      }
+    ],
+    "servingId": 1048,
+    "tmOpen": "2023-07-15T10:48:00.000Z",
+    "servingName": "Serving 48",
+    "priceList": "List 48",
+    "future": true,
+    "gst": 8
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08c22",
+    "dealId": "7764603413",
+    "tblNo": 49,
+    "customerId": "49",
+    "customerName": "Customer 49",
+    "orderType": 1,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 149,
+    "prnName": "Printer 49",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 49-1",
+        "count": {
+          "$numberDecimal": "73.5"
+        },
+        "price": {
+          "$numberDecimal": "59"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 49",
+        "portionId": 49,
+        "portionName": "Portion 49",
+        "tmOrder": "2023-07-15T12:49:00.000Z",
+        "alias": "Alias 49-1",
+        "_id": "64e1f3f19d8dc796e4b08c23"
+      },
+      {
+        "description": "Item 49-2",
+        "count": {
+          "$numberDecimal": "24.5"
+        },
+        "price": {
+          "$numberDecimal": "54"
+        },
+        "canceled": true,
+        "waitingForFire": true,
+        "remoteVendorName": "Vendor 49",
+        "portionId": 49,
+        "portionName": "Portion 49",
+        "tmOrder": "2023-07-15T12:59:00.000Z",
+        "alias": "Alias 49-2",
+        "_id": "64e1f3f19d8dc796e4b08c24"
+      }
+    ],
+    "servingId": 1049,
+    "tmOpen": "2023-07-15T10:49:00.000Z",
+    "servingName": "Serving 49",
+    "priceList": "List 49",
+    "future": false,
+    "gst": 9
+  },
+  {
+    "_id": "64e1f3f19d8dc796e4b08c25",
+    "dealId": "6945102648",
+    "tblNo": 50,
+    "customerId": "50",
+    "customerName": "Customer 50",
+    "orderType": 2,
+    "orderTypeName": "לקחת",
+    "queueId": null,
+    "clientId": "64e1e724881762979578e439",
+    "prnId": 150,
+    "prnName": "Printer 50",
+    "status": "QUEUE",
+    "pdfFile": null,
+    "items": [
+      {
+        "description": "Item 50-1",
+        "count": {
+          "$numberDecimal": "75"
+        },
+        "price": {
+          "$numberDecimal": "60"
+        },
+        "canceled": true,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 50",
+        "portionId": 50,
+        "portionName": "Portion 50",
+        "tmOrder": "2023-07-15T12:50:00.000Z",
+        "alias": "Alias 50-1",
+        "_id": "64e1f3f19d8dc796e4b08c26"
+      },
+      {
+        "description": "Item 50-2",
+        "count": {
+          "$numberDecimal": "25"
+        },
+        "price": {
+          "$numberDecimal": "55"
+        },
+        "canceled": false,
+        "waitingForFire": false,
+        "remoteVendorName": "Vendor 50",
+        "portionId": 50,
+        "portionName": "Portion 50",
+        "tmOrder": "2023-07-15T12:11:00.000Z",
+        "alias": "Alias 50-2",
+        "_id": "64e1f3f19d8dc796e4b08c27"
+      }
+    ],
+    "servingId": 1050,
+    "tmOpen": "2023-07-15T10:50:00.000Z",
+    "servingName": "Serving 50",
+    "priceList": "List 50",
+    "future": true,
+    "gst": 0
+  }
+]
