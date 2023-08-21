@@ -24,7 +24,8 @@ const Card = ({bon}) => {
     console.log("CLIECKED");
     setIsOpen(prev=>!prev)
   }
-  const {dealId, docPayTypeName, total, tax, productCount, servingName, prnId, prnName, items, pdfFile} = bon
+  const {dealId, docPayTypeName, total, tax, productCount, servingName, prnId, prnName, items, file} = bon
+  console.log(file);
   // const file = pdfFile&&pdfFile!=''?require(pdfFile):null
   pdfjs.GlobalWorkerOptions.workerSrc = new URL(
     'pdfjs-dist/build/pdf.worker.min.js',
@@ -36,14 +37,14 @@ const Card = ({bon}) => {
       <CardHeader dealId={dealId}/>
       <div className="flex border rounded-lg p-2 my-1">
         <div className=' w-full flex justify-center items-center py-2' onClick={()=>handleClick()} >
-        <Document  className='flex items-center justify-center mx-1 h-full w-full' file={pdfFile} onLoadSuccess={onDocumentLoadSuccess} noData={NoData}>
+        <Document  className='flex items-center justify-center mx-1 h-full w-full' file={file} onLoadSuccess={onDocumentLoadSuccess} noData={NoData}>
         <Page  width={300} scale={0.35} renderTextLayer={false} renderAnnotationLayer={false} pageNumber={pageNumber} />
       </Document>
         </div>
       </div>
         <button className='rounded-full mx-3 absolute bottom-1.5 mt-1 left-1/2 transform -translate-x-1/2 px-12 py-1 w-auto text-white bg-[#e4004a]'>בוצע</button>
     </div>
-    {isOpen&&createPortal(<PdfModal file={pdfFile} onClose={handleClose}/>, window.document.body)}
+    {isOpen&&createPortal(<PdfModal file={file} onClose={handleClose}/>, window.document.body)}
     </>
   );
 };

@@ -23,13 +23,14 @@
             "name": "Next.js: debug client-side",
             "type": "chrome",
             "request": "launch",
+            "runtimeExecutable": "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser",
             "url": "http://localhost:3000"
           },
           {
             "name": "Next.js: debug full stack",
             "type": "node-terminal",
             "request": "launch",
-            "command": "pnpm dev",
+            "command": "nvm use 16.19 && pnpm dev",
             "serverReadyAction": {
               "pattern": "started server on .+, url: (https?://.+)",
               "uriFormat": "%s",

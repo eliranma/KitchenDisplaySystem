@@ -20,6 +20,9 @@ const Main = () => {
   let session = data.session;
   let orders;
   let printers;
+  let prnId =  0
+  let autoRefresh = data.autoRefresh;
+  let autoRefreshInterval;
 
   
   const ordersReq = async (session, printer=0) => {
@@ -33,12 +36,14 @@ const Main = () => {
 
   const checkLocalStorageSession = ()=>{
     let tmp = localStorage.getItem("session")
+    tmp = JSON.parse(tmp)
     if (tmp?.token) return tmp
     throw new Error("No session found local storage!")
   }
 
   useEffect(() => {
-    if (!session) {
+    console.log(data)
+    if (!data.session) {
         try{
             session = checkLocalStorageSession()
             console.log(`Session found: ${session}`);
@@ -47,7 +52,8 @@ const Main = () => {
             console.log(err)
         }
         return router.push('/')
-    };
+    }
+
     // console.log("usEffect session result: ", session);
     try {
       ordersReq(session);
@@ -56,16 +62,33 @@ const Main = () => {
       console.log(e);
     }
     // console.log(session);
-  }, [session]);
+  }, [data?.session]);
 
   useEffect(()=>{
-    let prnId = data?.printerSelected?.prnId || 0
+     prnId = data?.printerSelected?.prnId || 0
     try{
       ordersReq(session, prnId);
     }catch(e){
       console.log(e)
     }
   },[data?.printerSelected])
+  useEffect(()=>{
+    console.log("USE EFFECT FOR AUTO REFRESH", data.autoRefresh);
+    console.log("SESSION AUTO REFRESH", data.session);
+
+    if (autoRefresh&&session){
+      autoRefreshInterval= setInterval(()=>{
+        try{
+          console.log("AUTO REFRESH INTERVAL");
+          ordersReq(data.session, prnId);
+        }catch(e){
+          console.log(e)
+        }
+      },10000)
+    }else{
+      clearInterval(autoRefreshInterval)
+    }
+  },[data?.autoRefresh])
 
   return (
     <Screen>

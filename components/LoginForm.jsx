@@ -30,11 +30,14 @@ const LoginForm = ({ username = null, password = null }) => {
         ? localStorage.setItem("session", JSON.stringify(success))
         : null;
       setData((prev) => ({ ...prev, session: success, isRememberMe }));
-      router.push("/orders");
+      setTimeout(() => {
+      router.push("/orders", {prefetch:false});
+      }, 500);
+      
     } else {
       setErrorMessage("Login failed. Please check your credentials.");
     }
-    return;
+    
   };
 
   return (
