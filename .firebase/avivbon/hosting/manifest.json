@@ -1,0 +1,14 @@
+{
+    "name": "Aviv Kitchen Display",
+    "short_name": "Aviv KDS",
+    "theme_color": "#FFFFFF",
+    "background_color": "#FFFFFF",
+    "start_url": "/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "url_handlers": [
+      {
+        "origin": "https://bon.aviv-pos.co.il"
+      }
+    ]
+  }

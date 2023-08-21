@@ -20,16 +20,16 @@ class ServerSideAPI {
     return result;
   };
 
-  getOrders = async (session)=>{
+  getOrders = async (session, printer)=>{
     const authHeader = "Bearer " + session.token
     let u = session.clientId
     let result;
-    let suffix = `/kitchen/order/${u}/getOrders`;
+    let suffix = `/kitchen/order/${u}/getOrders/${printer}`;
     let compUrl = baseUrl + suffix;
-    console.log(compUrl);
+    // console.log(compUrl);
     await axios.get(compUrl,{headers:{Authorization:authHeader}})
     .then((res)=>{
-      console.log(res);
+      console.log(res.data);
       if(!res){
         result = res
         return result
@@ -51,6 +51,7 @@ class ServerSideAPI {
     try{
       await axios.get(compUrl,{headers:{Authorization:`Bearer ${token}`}})
       .then((res)=>{
+        console.log("GetPrinters: ",res.data)
         if (res?.status===200){
           printers= res.data
           return printers
@@ -60,9 +61,10 @@ class ServerSideAPI {
         }
       })
     }catch(e){
-      console.log(err)
+      console.log(e)
       return null
     }
+    return printers
   } 
 }
 module.exports = new ServerSideAPI

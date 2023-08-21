@@ -18,7 +18,7 @@ const LoginPage = () => {
 
   return (
   <div className='flex-col  w-full h-full flex bg-slate-500'>
-  <LoginForm username={username} password={password} />;
+  <LoginForm username={username} password={password} />
   </div>)
 };
 

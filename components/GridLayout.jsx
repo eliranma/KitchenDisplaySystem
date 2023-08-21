@@ -7,12 +7,16 @@ import Card from './Card';
 // import mockup from '../mockup/mockup.json';
 import { generateLayouts } from '@/utils/layoutGenerator';
 import { pdfjs } from 'react-pdf';
-const isMobile = require('is-mobile');
+import { useAppContext } from "@/context/AppContext";
+import isMobile from "is-mobile";
 
-const GridLayout = ({data=[], draggable=null}) => {
+
+const GridLayout = ({draggable=null}) => {
   let cols = isMobile()?2:4
   // const [gridData, setGridData] = useState(data)
+  const {data} = useAppContext()
   let width = globalThis.window?.innerWidth
+  // const [dataGrid] = useState(data?.orders)
     
     const [layouts, setLayouts] = useState([])
 
@@ -24,10 +28,10 @@ const GridLayout = ({data=[], draggable=null}) => {
     
     
     useEffect(()=>{
-      let initLayouts = generateLayouts(data.length,cols );
+      let initLayouts = generateLayouts(data?.orders?.length,cols );
       console.log(initLayouts)
       setLayouts(initLayouts)
-    },[])
+    },[data?.orders])
     
     return (
         <div className=' h-auto overflow-y-auto overflow-x-hidden'>
@@ -42,7 +46,7 @@ const GridLayout = ({data=[], draggable=null}) => {
           onLayoutChange={(l)=>setLayouts(l)}
           width={width} // You might want to use a more sophisticated method to get width
         >
-        {data?data.map((item,i)=>{
+        {data?.orders?data.orders.map((item,i)=>{
           return (
           <div key={i.toString()}>
           <Card  bon={item} />
