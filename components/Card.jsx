@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom';
 import CardHeader from './CardHeader';
 import NoData from './NoData';
 import { pdfjs, Document, Page } from 'react-pdf';
-import isMobile from 'is-mobile';
+// import isMobile from 'is-mobile';
 import PdfModal from './PdfModal';
 
 
@@ -13,7 +13,7 @@ const Card = ({bon}) => {
   const [numPages, setNumPages] = useState();
   const [pageNumber, setPageNumber] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
-  console.log(bon.pdfFile);
+  // console.log(bon.file);
   const onDocumentLoadSuccess =({ numPages })=>{
     setNumPages(numPages);
   }
@@ -33,11 +33,11 @@ const Card = ({bon}) => {
   ).toString();
   return (
     <>
-    <div dir="rtl" className="flex flex-col p-4 relative rounded-lg shadow-md h-full bg-white">
+    <div dir="rtl" className="flex flex-col p-4 relative rounded-lg shadow-md h-max bg-white">
       <CardHeader dealId={dealId}/>
       <div className="flex border rounded-lg p-2 my-1">
-        <div className=' w-full flex justify-center items-center py-2' onClick={()=>handleClick()} >
-        <Document  className='flex items-center justify-center mx-1 h-full w-full' file={file} onLoadSuccess={onDocumentLoadSuccess} noData={NoData}>
+        <div className=' w-full flex justify-center items-center py-2 ' onClick={()=>handleClick()} >
+        <Document  className='flex items-center justify-center mx-1 h-full w-full' file={{data:file.data}} onLoadSuccess={onDocumentLoadSuccess} noData={NoData}>
         <Page  width={300} scale={0.35} renderTextLayer={false} renderAnnotationLayer={false} pageNumber={pageNumber} />
       </Document>
         </div>
