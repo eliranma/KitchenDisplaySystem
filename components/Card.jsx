@@ -86,18 +86,3 @@ const Card = ({ bon }) => {
 };
 
 export default Card;
-
-// import { useState } from 'react';
-// import { Document, Page } from 'react-pdf';
-
-// function MyApp() {
-
-//   return (
-//     <div>
-
-//       <p>
-//         Page {pageNumber} of {numPages}
-//       </p>
-//     </div>
-//   );
-// }
