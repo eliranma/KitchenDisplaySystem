@@ -73,20 +73,21 @@ const Main = () => {
     }
   },[data?.printerSelected])
   useEffect(()=>{
-    console.log("USE EFFECT FOR AUTO REFRESH", data.autoRefresh);
-    console.log("SESSION AUTO REFRESH", data.session);
 
     if (autoRefresh&&session){
       autoRefreshInterval= setInterval(()=>{
         try{
           console.log("AUTO REFRESH INTERVAL");
-          ordersReq(data.session, prnId);
+
+          // ordersReq(data.session, prnId);
         }catch(e){
           console.log(e)
         }
       },10000)
     }else{
+      console.log("clearing interval")
       clearInterval(autoRefreshInterval)
+      console.log(autoRefreshInterval)
     }
   },[data?.autoRefresh])
 

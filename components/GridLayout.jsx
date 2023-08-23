@@ -28,9 +28,14 @@ const GridLayout = ({draggable=null}) => {
     
     
     useEffect(()=>{
-      let initLayouts = generateLayouts(data?.orders?.length,cols );
+      let len = data?.orders?.length
+      if (len>0 && len!=layouts.length){
+      let initLayouts = generateLayouts(len,cols );
       console.log(initLayouts)
       setLayouts(initLayouts)
+      }else{
+        console.log("Nothing to change!")
+      }
     },[data?.orders])
     
     return (
