@@ -37,7 +37,7 @@ const Main = () => {
   const checkLocalStorageSession = ()=>{
     let tmp = localStorage.getItem("session")
     tmp = JSON.parse(tmp)
-    if (tmp?.token) return tmp
+    if (tmp.token) return tmp
     throw new Error("No session found local storage!")
   }
 
@@ -50,8 +50,8 @@ const Main = () => {
             setData(prev=>({...prev, session:session}))
         }catch(err){
             console.log(err)
+            return router.push('/')
         }
-        return router.push('/')
     }
 
     // console.log("usEffect session result: ", session);

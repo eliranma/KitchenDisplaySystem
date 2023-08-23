@@ -39,7 +39,7 @@ const GridLayout = ({draggable=null}) => {
     },[data?.orders])
     
     return (
-        <div className=' h-auto overflow-y-auto overflow-x-hidden'>
+        <div className=' h-[100vh] overflow-x-hidden'>
         <ResponsiveGridLayout
           className="layout"
           style={{paddingTop:5}}
@@ -53,7 +53,7 @@ const GridLayout = ({draggable=null}) => {
         >
         {data?.orders?data.orders.map((item,i)=>{
           return (
-          <div key={i.toString()}>
+          <div className=" rounded-lg shadow-md bg-white"  key={i.toString()}>
           <Card  bon={item} />
           </div>
           )
