@@ -1,15 +1,15 @@
 import React, {useState} from "react";
+import { useLayoutContext } from "@/context/LayoutContext";
 
-const LayoutButton = ({ action }) => {
-    const [button, setButton] = useState(true)
+const LayoutButton = () => {
+    const {layoutDraggable, setLayoutDraggable} = useLayoutContext()
   const handleLayoutStatic = () => {
-    setButton(prev=>!prev)
-    action((prev) => !prev);
+    setLayoutDraggable(prev=>!prev)
     // console.log(layoutRef)
   };
   return (
     <div className="flex justify-center w-max py-1 mr-1">
-      {button?<button
+      {!layoutDraggable?<button
         className="flex items-center rounded-full px-5 bg-emerald-400"
         onClick={() => handleLayoutStatic()}
       >

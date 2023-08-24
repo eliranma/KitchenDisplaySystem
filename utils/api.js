@@ -1,4 +1,5 @@
 import axios from "axios";
+import { headers } from "next/dist/client/components/headers";
 const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 class ServerSideAPI {
@@ -19,23 +20,47 @@ class ServerSideAPI {
     return result;
   };
 
-  askForNewOrders = async (session, exists = [], printer=0) => {
-    if (session?.token === undefined || session?.clientId === undefined){
+  askForNewOrders = async (session, exists = [], printer = 0) => {
+    if (session?.token === undefined || session?.clientId === undefined) {
       return [];
     }
-    let result
+    let result;
     let suffix = `/kitchen/order/${u}/askForNewOrders/${printer}`;
     let compUrl = baseUrl + suffix;
-    let reqBody = exists
-    await axios.post(compUrl, reqBody)
-    .then((res)=>{
-      result=res
-      return result.data;
-    })
-    .catch((err)=>{
-      console.log(err)
-      return []
-    })
+    let reqBody = exists;
+    await axios
+      .post(compUrl, reqBody)
+      .then((res) => {
+        result = res;
+        return result.data;
+      })
+      .catch((err) => {
+        console.log(err);
+        return [];
+      });
+  };
+
+  updateOrderStatus = async (orderId, session) => {
+    const authHeader = "Bearer " + session.token;
+    let u = session.clientId;
+    let result;
+    let suffix = `/kitchen/order/${u}/update/${orderId}`;
+    let compUrl = baseUrl + suffix;
+    console.log(authHeader)
+    await axios
+      .get(compUrl,  { headers: { Authorization: authHeader } })
+      .then((res) => {
+        if (res.status === 200) {
+          result = true;
+        } else {
+          result = false;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        result = false;
+      });
+    return result;
   };
 
   getOrders = async (session, printer) => {

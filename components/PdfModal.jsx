@@ -5,13 +5,13 @@ const PdfModal = ({ onClose, file }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="fixed flex inset-0 bg-gray-500 bg-opacity-75 transition-opacity" onClick={onClose}></div>
-      <div className="relative h-auto w-full max-w-lg mx-auto p-4 bg-white rounded-lg shadow-xl">
+      <div className="relative h-auto w-full max-w-[80vw] mx-auto p-4 bg-white rounded-lg shadow-xl">
         {/* MODAL CONTENT */}
-        <div className='flex items-center justify-center max-h-[40vh] '>
-        <div className=' flex py-5 overflow-y-auto'>
+        <div className='flex flex-wrap overflow-y-auto items-center justify-center h-[60vh] '>
+        <div className=' flex bg-black py-5 '>
         <Document  file={file}
-        className="flex items-center justify-center mx-1" >
-          <Page  pageNumber={1} renderTextLayer={false} renderAnnotationLayer={false} />
+        className="flex items-start" >
+          <Page width={window.innerWidth*0.65}  pageNumber={1} renderTextLayer={false} renderAnnotationLayer={false} />
         </Document>
         </div>
         </div>

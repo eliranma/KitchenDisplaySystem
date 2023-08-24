@@ -19,7 +19,7 @@ const RefreshHandler = () => {
   // }, [autoRefresh]);
 
   return (
-    <div className="w-max flex items-center justify-center mx-1 rounded-full bg-lime-200 px-1">
+    <div className="w-max flex items-center justify-center mx-1 rounded-full bg-lime-200 p-1">
       <label className="relative  inline-flex items-center justify-center cursor-pointer">
         <input
           value={autoRefresh}
