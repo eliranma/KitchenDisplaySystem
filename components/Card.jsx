@@ -8,6 +8,7 @@ import NoData from "./NoData";
 import { pdfjs, Document, Page, View } from "react-pdf";
 // import isMobile from 'is-mobile';
 import PdfModal from "./PdfModal";
+import Image from "next/image";
 import isMobile from "is-mobile";
 
 const Card = ({id, bon }) => {
@@ -74,22 +75,29 @@ const Card = ({id, bon }) => {
   ).toString();
 
   const renderedPDF = useMemo(() => {
+  //   const byteArray = new Uint8Array(file.data); 
+  //   const decoder = new TextDecoder('utf-8');
+  // const htmlString = decoder.decode(byteArray);
+  console.log(file);
     return (
-      <Document
-        className="flex items-start justify-center mx-1"
-        file={{ data: file.data }}
-        onLoadSuccess={onDocumentLoadSuccess}
-        noData={NoData}
-      >
-        <Page
-          // width={pdfWidth}
-          renderTextLayer={false}
-          renderAnnotationLayer={false}
-          pageNumber={pageNumber}
-        />
-      </Document>
+      // <Document
+      //   className="flex items-start justify-center mx-1"
+      //   file={{ data: file.data }}
+      //   onLoadSuccess={onDocumentLoadSuccess}
+      //   noData={NoData}
+      // >
+      //   <Page
+      //     // width={pdfWidth}
+      //     renderTextLayer={false}
+      //     renderAnnotationLayer={false}
+      //     pageNumber={pageNumber}
+      //   />
+      // </Document>
+      // <div dangerouslySetInnerHTML={{__html:htmlString}} />
+      <Image src={`data:image/jpeg;base64, ${Buffer.from(file.data).toString('base64')}`} width={window.innerWidth} height={20} />
+      
     );
-  }, [file.data, pageNumber]);
+  }, [file, pageNumber]);
 
 
   return (
