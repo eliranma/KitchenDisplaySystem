@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const withPWA = require('next-pwa')({
-  dest: 'public'
+  dest: 'public',
 })
+// PWA ISSUES WITH LOCAL STORAGE TO SOLVE!!!
 
 const nextConfig = {
   webpack: (config) => {

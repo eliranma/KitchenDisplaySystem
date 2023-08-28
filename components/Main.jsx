@@ -5,20 +5,31 @@ import SortButton from "./SortButton";
 import PrinterMenu from "./PrinterMenu";
 import LayoutButton from "./LayoutButton";
 import RefreshHandler from "./RefreshHandler";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 // import { useParams } from "next/navigation"
+// import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import ServerSideAPI from "../utils/api";
 import { useLayoutContext } from "../context/LayoutContext";
 import { useAppContext } from "@/context/AppContext";
 import isMobile from "is-mobile";
 import DropdownButton from "./DropDownButton";
+// import localforage from "localforage";
 
 const Main = () => {
   const { data, setData } = useAppContext();
   const { layoutDraggable, setLayoutDraggable } = useLayoutContext();
   const router = useRouter();
+  const [showInstallMessage,setShowInstallMessage] = useState(false)
   const autoRefreshIntervalRef = useRef(null);
+// Detects if device is on iOS 
+const isIos = () => {
+  const userAgent = window.navigator.userAgent.toLowerCase();
+  return /iphone|ipad|ipod/.test( userAgent );
+}
+// Detects if device is in standalone mode
+const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
+
 
   let session = data.session;
   let orders;
@@ -96,7 +107,12 @@ const Main = () => {
       clearInterval(autoRefreshIntervalRef.current);
     };
   }, [data?.autoRefresh, session, data.session, prnId]);
-
+useEffect(()=>{
+  // Checks if should display install popup notification:
+if (isIos() && !isInStandaloneMode()) {
+  setShowInstallMessage(true)
+}
+},[])
   return (
     <Screen>
       <div className="sticky top-14 bg-white  z-50 flex h-9 flex-row">
@@ -119,9 +135,7 @@ const Main = () => {
         )}
       </div>
       <GridLayout draggable={layoutDraggable} />
-      {/* <p>
-            sdhsdas
-        </p> */}
+      {/* {setShowInstallMessage} */}
     </Screen>
   );
 };

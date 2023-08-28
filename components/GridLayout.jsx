@@ -6,7 +6,7 @@ import React,{useState, useEffect} from 'react'
 import Card from './Card';
 // import mockup from '../mockup/mockup.json';
 import { generateLayouts } from '@/utils/layoutGenerator';
-import { pdfjs } from 'react-pdf';
+
 import { useAppContext } from "@/context/AppContext";
 import isMobile from "is-mobile";
 import { useLayoutContext } from "@/context/LayoutContext";
@@ -21,12 +21,6 @@ const GridLayout = () => {
   // const [dataGrid] = useState(data?.orders)
     
 
-
-    pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-      'pdfjs-dist/build/pdf.worker.min.js',
-      import.meta.url,
-    ).toString();
-    
     
     useEffect(()=>{
       let len = data?.orders?.length

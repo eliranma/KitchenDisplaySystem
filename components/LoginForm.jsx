@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import ServerSideAPI from "../utils/api";
 import { useAppContext } from "@/context/AppContext";
+// import localforage from 'localforage';
 
 const LoginForm = ({ username = null, password = null }) => {
   const router = useRouter();
@@ -14,6 +15,7 @@ const LoginForm = ({ username = null, password = null }) => {
 
   useEffect(() => {
     console.log(username, password);
+    
     if (username && password) {
       handleLogin();
     }
@@ -27,7 +29,7 @@ const LoginForm = ({ username = null, password = null }) => {
       // Simulate session object
       console.log("login result: ", success);
       isRememberMe
-        ? localStorage.setItem("session", JSON.stringify(success))
+        ?  localStorage.setItem("session", JSON.stringify(success))
         : null;
       setData((prev) => ({ ...prev, session: success, isRememberMe }));
       setTimeout(() => {
@@ -47,7 +49,7 @@ const LoginForm = ({ username = null, password = null }) => {
     >
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
         <h2 className="text-2xl font-semibold mb-4">התחברות</h2>
-        <form onSubmit={handleLogin}>
+        <div>
           {/* USERNAME FIELD */}
           <div className="mb-4">
             <label htmlFor="username" className="block mb-1 font-medium">
@@ -112,14 +114,14 @@ const LoginForm = ({ username = null, password = null }) => {
               <p>שמור פרטי התחברות </p>
             </div>
             <button
-              onClick={() => handleLogin(user, pass)}
+              onClick={()=>handleLogin(user, pass)}
               className="bg-pink-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
             >
               התחבר
             </button>
           </div>
           {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
-        </form>
+        </div>
       </div>
     </div>
   );

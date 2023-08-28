@@ -11,7 +11,7 @@ export const metadata = {
   description: 'Powered By AVIV POS',
   'application-name':'AvivKitchenDisplay',
   'apple-mobile-web-app-capable':'yes',
-  'apple-mobile-web-app-status-bar-style':'default',
+  'apple-mobile-web-app-status-bar-style':'black-translucen',
   'apple-mobile-web-app-title':'AvivKitchenDisplay',
   manifest:'/manifest.json',
 

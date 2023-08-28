@@ -9,7 +9,8 @@ export const generateLayouts = (numItems, cols=2)=> {
         y: Math.floor(i / cols) * y, // Move to the next row every 6 items
         w: 1,           // Each item has a width of 2 columns
         h: 2,           // Each item has a height of 2 rows
-        static: false
+        static: false,
+        minH:2
       });
     }
     return layouts;
