@@ -9,7 +9,7 @@ import { pdfjs, Document, Page, View } from "react-pdf";
 // import isMobile from 'is-mobile';
 import PdfModal from "./PdfModal";
 import Image from "next/image";
-import isMobile from "is-mobile";
+// import isMobile from "is-mobile";
 
 const Card = ({ id, bon }) => {
   const cardRef = useRef(null);
@@ -25,16 +25,16 @@ const Card = ({ id, bon }) => {
           let tmp = data.orders;
           tmp.splice(id, 1);
           setData((prev) => ({ ...prev, orders: tmp }));
-          console.log(data.orders);
+          // console.log(data.orders);
           // prints the right status res.data.length -1 but thr data.order become only with this item
           return;
         }
-        console.log(res);
+        // console.log(res);
       } catch (err) {
         console.log(err);
       }
     } else {
-      console.log(bon);
+      // console.log(bon);
     }
   };
   // const onDocumentLoadSuccess = ({ numPages }) => {
@@ -59,19 +59,18 @@ const Card = ({ id, bon }) => {
     tblNo,
     productCount,
     servingName,
-    prnId,
     prnName,
     items,
     file,
   } = bon;
-  console.log(file);
+  // console.log(file);
   // const file = pdfFile&&pdfFile!=''?require(pdfFile):null
   // pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   //   "pdfjs-dist/build/pdf.worker.min.js",
   //   import.meta.url
   // ).toString();
   useEffect(() => {
-    console.log(`card height:${cardRef.current.offsetHeight}`);
+    // console.log(`card height:${cardRef.current.offsetHeight}`);
     setBonHeight(cardRef.current.offsetHeight *0.45);
   }, [cardRef?.current?.offsetHeight]);
 
@@ -79,7 +78,7 @@ const Card = ({ id, bon }) => {
     //   const byteArray = new Uint8Array(file.data);
     //   const decoder = new TextDecoder('utf-8');
     // const htmlString = decoder.decode(byteArray);
-    console.log(file);
+    // console.log(file);
     return (
       // <Document
       //   className="flex items-start justify-center mx-1"
@@ -117,7 +116,7 @@ const Card = ({ id, bon }) => {
         <div className="flex border rounded-lg my-1">
           <div
           style={{height:bonHeight}}
-            className="w-full  flex flex-wrap justify-center items-start mt-2 overflow-y-auto overflow-x-hidden bg-violet-50" //IMPORTANT!!! this wraps all th pdf inside a predefined height component
+            className="w-full  flex flex-wrap justify-center items-start mt-2 overflow-y-auto overflow-x-hidden bg-white" //IMPORTANT!!! this wraps all th pdf inside a predefined height component
             onClick={handleClick}
           >
             {renderedPDF}

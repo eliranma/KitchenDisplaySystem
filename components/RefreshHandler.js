@@ -23,9 +23,10 @@ const RefreshHandler = () => {
       <label className="relative  inline-flex items-center justify-center cursor-pointer">
         <input
           value={autoRefresh}
+          checked={autoRefresh}
           type="checkbox"
           className="sr-only peer"
-          onClick={() =>
+          onChange={() =>
             setData((prev) => ({ ...prev, autoRefresh: !prev.autoRefresh }))
           }
         />

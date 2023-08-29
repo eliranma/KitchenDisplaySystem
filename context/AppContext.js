@@ -9,12 +9,12 @@ export const AppProvider = ({ children }) => {
     session: null,
     orders: null,
     printers:null,
-    printerSelected: 0,
+    printerSelected: "הכל",
     isRememberMe: true,
     sorted:"NONE",
-    autoRefresh: false
+    autoRefresh: true
   }); // You can store any state here
-  console.log(data);
+  // console.log(data);
   return (
     <AppContext.Provider value={{ data, setData }}>
       {children}

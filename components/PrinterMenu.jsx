@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useAppContext } from "@/context/AppContext";
-import {prnValidator} from "../utils/validators";
 
 
 const PrinterMenu = () => {
-  const [options, setOptions] = useState([{ name: "הכל", prnId: 0 }]);
+  const [options, setOptions] = useState([{ name: "הכל", _id: 0 }]);
   const [selectedOption, setSelectedOption] = useState(undefined);
   const {data, setData} = useAppContext()
   useEffect(() => {
     // Fetch options from the server when the component mounts
     // fetchOptionsFromServer();
-    console.log(data)
+    // console.log(data)
     if (data && data.printers) {
-      const concatenatedArray = data.printers.filter(prnValidator).concat(options.filter(prnValidator));
-      setOptions(concatenatedArray);
+      setOptions( [{ name: "הכל", _id: 0 },...data.printers]);
     }
     // setOptions([{value:"מטבח",id:1, label:"מטבח"}])
   }, [data.printers]);
@@ -23,6 +21,7 @@ const PrinterMenu = () => {
     setSelectedOption(optionValue);
     const option = options.find(o=> o.name===optionValue);
     setData(prev=>({...prev, printerSelected:option}))
+    
   };
 
   return (
@@ -34,7 +33,7 @@ const PrinterMenu = () => {
           className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
         >
           {options?.map((option) => (
-            <option key={option.prnId} value={option.name || ""}>
+            <option key={option._id} value={option.name || ""}>
               {option.name || ""}
             </option>
           ))}

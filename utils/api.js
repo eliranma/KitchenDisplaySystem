@@ -1,13 +1,15 @@
 import axios from "axios";
-import { headers } from "next/dist/client/components/headers";
-const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+const baseUrl =
+  process.env.NODE_ENV === "development"
+    ? process.env.NEXT_PUBLIC_API_URL_DEV
+    : process.env.NEXT_PUBLIC_API_URL_PROD;
 
 class ServerSideAPI {
   login = async (u, p) => {
     let result;
     let suffix = `/kitchen/client/${u}/login`;
     let compUrl = baseUrl + suffix;
-    console.log(compUrl);
+    // console.log(compUrl);
     await axios
       .post(compUrl, { userId: p })
       .then((res) => {
@@ -20,24 +22,27 @@ class ServerSideAPI {
     return result;
   };
 
-  askForNewOrders = async (session, exists = [], printer = 0) => {
+  askForNewOrders = async (session, exists = [], printer = "") => {
     if (session?.token === undefined || session?.clientId === undefined) {
       return [];
     }
+    const authHeader = "Bearer " + session.token;
+    let clientId = session.clientId;
     let result;
-    let suffix = `/kitchen/order/${u}/askForNewOrders/${printer}`;
+    let suffix = `/kitchen/order/${clientId}/newOrders`;
     let compUrl = baseUrl + suffix;
-    let reqBody = exists;
+    let reqBody = {orders:exists, printer:printer};
     await axios
-      .post(compUrl, reqBody)
+      .post(compUrl, reqBody, { headers: { Authorization: authHeader }})
       .then((res) => {
-        result = res;
-        return result.data;
+        result =res.data;
+        return
       })
       .catch((err) => {
         console.log(err);
-        return [];
+        result = []
       });
+      return result
   };
 
   updateOrderStatus = async (orderId, session) => {
@@ -46,9 +51,9 @@ class ServerSideAPI {
     let result;
     let suffix = `/kitchen/order/${u}/update/${orderId}`;
     let compUrl = baseUrl + suffix;
-    console.log(authHeader)
+    // console.log(authHeader);
     await axios
-      .get(compUrl,  { headers: { Authorization: authHeader } })
+      .get(compUrl, { headers: { Authorization: authHeader } })
       .then((res) => {
         if (res.status === 200) {
           result = true;
@@ -68,6 +73,7 @@ class ServerSideAPI {
     let u = session.clientId;
     let result;
     let suffix = `/kitchen/order/${u}/getOrders/${printer}`;
+    if (printer==='')suffix = `/kitchen/order/${u}/getOrders`;
     let compUrl = baseUrl + suffix;
     // console.log(compUrl);
     await axios

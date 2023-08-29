@@ -24,8 +24,9 @@ const GridLayout = () => {
     
     useEffect(()=>{
       let len = data?.orders?.length
-      if (len>0 && len!=layout.length){
-      let initLayouts = generateLayouts(len,cols );
+      // debugger
+      if (len>0 && len!==layout.length){
+      let initLayouts = generateLayouts(len,cols);
       console.log(initLayouts)
       setLayout(initLayouts)
       }else{
@@ -34,7 +35,7 @@ const GridLayout = () => {
     },[data?.orders])
     
     return (
-        <div className=' h-[100vh] overflow-x-hidden'>
+        <div className=' overflow-x-hidden'>
         <ResponsiveGridLayout
           className="layout"
           compactType='vertical'

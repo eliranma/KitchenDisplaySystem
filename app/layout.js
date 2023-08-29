@@ -7,14 +7,9 @@ import Providers from './providers'
 const assistant = Assistant({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Aviv Kitchen Display system',
-  description: 'Powered By AVIV POS',
-  'application-name':'AvivKitchenDisplay',
-  'apple-mobile-web-app-capable':'yes',
-  'apple-mobile-web-app-status-bar-style':'black-translucen',
-  'apple-mobile-web-app-title':'AvivKitchenDisplay',
   manifest:'/manifest.json',
-
+  'apple-touch-icon':"/icons/apple-touch-icon.png",
+  'theme-color': '#E4004A',
 }
 
 export default function RootLayout({ children }) {

@@ -17,7 +17,7 @@ export const LayoutProvider = ({ children }) => {
 // Custom hook to use the LayoutContext
 export const useLayoutContext = () => {
   const context = useContext(LayoutContext);
-  console.log(context.layout)
+  // console.log(context.layout)
   if (!context) {
     throw new Error('useLayoutContext must be used within an LayoutProvider');
   }

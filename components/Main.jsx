@@ -34,12 +34,27 @@ const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.n
   let session = data.session;
   let orders;
   let printers;
-  let prnId = data.printerSelected;
+  let prnName = data.printerSelected;
 
-  const ordersReq = async (session, printer = 0) => {
+  const ordersReq = async (session, printer = "") => {
     orders = await ServerSideAPI.getOrders(session, printer);
     setData((prev) => ({ ...prev, orders: orders, sorted: "NONE" }));
   };
+
+  const newOrdersReq = async (session, printer = "") => {
+    if (!orders) return;
+    let currentIds = []
+    orders.map(o=> currentIds.push(o._id))
+    // console.log(currentIds);
+    let newOrders = await ServerSideAPI.askForNewOrders(session, currentIds, printer);
+    console.log(newOrders);
+    if (Array.isArray(newOrders)&& newOrders.length>0){
+      let updated = [...new Map([...orders, ...newOrders].map(doc => [doc._id, doc])).values()];
+      orders = updated
+      setData((prev) => ({ ...prev, orders:  updated}));
+    }
+  };
+
   const printersReq = async (session) => {
     printers = await ServerSideAPI.getPrinters(session);
     setData((prev) => ({ ...prev, printers: printers }));
@@ -53,7 +68,7 @@ const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.n
   };
 
   useEffect(() => {
-    console.log(data);
+    // console.log(data);
     if (!data.session) {
       try {
         session = checkLocalStorageSession();
@@ -77,9 +92,9 @@ const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.n
 
   // Listen to changes of selectedPrinter
   useEffect(() => {
-    prnId = data?.printerSelected?.prnId || 0;
+    prnName = data?.printerSelected?.prnName || '';
     try {
-      ordersReq(session, prnId);
+      ordersReq(session, prnName);
     } catch (e) {
       console.log(e);
     }
@@ -89,9 +104,10 @@ const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.n
   useEffect(() => {
     if (data.autoRefresh === true && session) {
       // console.log("AUTO REFRESH INTERVAL");
-      autoRefreshIntervalRef.current = setInterval(() => {
+      autoRefreshIntervalRef.current = setInterval(async() => {
         try {
-          ordersReq(session, prnId);
+          let reqPrn = prnName==='הכל'?null:prnName
+          await newOrdersReq(session, reqPrn);
         } catch (e) {
           console.log(e);
         }
@@ -106,13 +122,17 @@ const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.n
     return () => {
       clearInterval(autoRefreshIntervalRef.current);
     };
-  }, [data?.autoRefresh, session, data.session, prnId]);
-useEffect(()=>{
-  // Checks if should display install popup notification:
-if (isIos() && !isInStandaloneMode()) {
-  setShowInstallMessage(true)
-}
-},[])
+  }, [data?.autoRefresh, session, data.session, prnName]);
+
+
+// useEffect(()=>{
+//   // Checks if should display install popup notification:
+// if (isIos() && !isInStandaloneMode()) {
+//   setShowInstallMessage(true)
+// }
+// },[])
+
+
   return (
     <Screen>
       <div className="sticky top-14 bg-white  z-50 flex h-9 flex-row">

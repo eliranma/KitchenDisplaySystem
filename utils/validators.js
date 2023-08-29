@@ -1,3 +1,3 @@
-export const prnValidator = (obj) => {
-    return obj.hasOwnProperty('prnId') && typeof obj.prnId === 'number';
+export const orderValidator = (obj) => {
+    return obj.hasOwnProperty('_id') && typeof obj._id === 'number';
   };
