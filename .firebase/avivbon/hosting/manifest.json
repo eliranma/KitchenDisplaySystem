@@ -1,14 +1,32 @@
 {
-    "name": "Aviv Kitchen Display",
-    "short_name": "Aviv KDS",
-    "theme_color": "#FFFFFF",
-    "background_color": "#FFFFFF",
-    "start_url": "/",
-    "display": "standalone",
-    "orientation": "portrait",
-    "url_handlers": [
+  "theme_color": "#E4004A",
+  "background_color": "#E4004A",
+  "display": "fullscreen",
+  "scope": "/",
+  "start_url": ".",
+  "name": "Aviv Kitchen Display",
+  "short_name": "Aviv KDS",
+  "description": "Kitchen Display powered by AVIV POS",
+  "icons": [
       {
-        "origin": "https://bon.aviv-pos.co.il"
+          "src": "/icons/icon-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+      },
+      {
+          "src": "/icons/icon-256x256.png",
+          "sizes": "256x256",
+          "type": "image/png"
+      },
+      {
+          "src": "/icons/icon-384x384.png",
+          "sizes": "384x384",
+          "type": "image/png"
+      },
+      {
+          "src": "/icons/icon-512x512.png",
+          "sizes": "512x512",
+          "type": "image/png"
       }
-    ]
-  }
+  ]
+}

@@ -15,7 +15,7 @@ const LoginForm = ({ username = null, password = null }) => {
 
   useEffect(() => {
     console.log(username, password);
-    
+
     if (username && password) {
       handleLogin();
     }
@@ -29,17 +29,15 @@ const LoginForm = ({ username = null, password = null }) => {
       // Simulate session object
       console.log("login result: ", success);
       isRememberMe
-        ?  localStorage.setItem("session", JSON.stringify(success))
+        ? localStorage.setItem("session", JSON.stringify(success))
         : null;
       setData((prev) => ({ ...prev, session: success, isRememberMe }));
       setTimeout(() => {
-      router.push("/orders", {prefetch:false});
+        router.push("/orders", { prefetch: false });
       }, 500);
-      
     } else {
       setErrorMessage("Login failed. Please check your credentials.");
     }
-    
   };
 
   return (
@@ -114,7 +112,7 @@ const LoginForm = ({ username = null, password = null }) => {
               <p>שמור פרטי התחברות </p>
             </div>
             <button
-              onClick={()=>handleLogin(user, pass)}
+              onClick={() => handleLogin(user, pass)}
               className="bg-pink-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
             >
               התחבר

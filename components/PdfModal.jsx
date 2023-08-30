@@ -29,7 +29,7 @@ const PdfModal = ({ onClose, file }) => {
       // For Receiving Html elements
 
       // <div style={{}} dangerouslySetInnerHTML={{ __html: htmlString }} />
-      <Image src={`data:image/jpeg;base64, ${Buffer.from(file.data).toString('base64')}`} width={window.innerWidth*0.7} height={20} alt="bon" />
+      <Image src={`data:image/jpeg;base64, ${Buffer.from(file.data).toString('base64')}`} width={window.innerWidth*0.7} height={50} alt="bon" />
     );
   }, [file.data]);
   return (
@@ -38,9 +38,9 @@ const PdfModal = ({ onClose, file }) => {
         className="fixed flex inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
         onClick={onClose}
       ></div>
-      <div className="relative h-auto w-full max-w-[30vw] mx-auto p-4 bg-white rounded-lg shadow-xl">
+      <div className="relative h-auto w-full max-w-[50vw] mx-auto p-4  bg-white rounded-lg shadow-xl">
         {/* MODAL CONTENT */}
-        <div className="flex flex-wrap overflow-y-auto items-center justify-center h-[85vh] ">
+        <div className="flex flex-wrap overflow-y-auto items-center justify-center  max-h-[65vh] ">
           <div className=" flex justify-center items-center w-full py-5 ">
             {/* <Document  file={file}
         className="flex items-start" >

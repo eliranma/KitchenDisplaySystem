@@ -17,7 +17,7 @@ const CardHeader = ({
         setIsOpen(prev=>!prev)
     }
   return (
-    <div className="bg-white z-50 shadow-md rounded-lg p-6 space-y-3">
+    <div className="bg-white z-50 shadow-md rounded-lg p-2 space-y-3">
     <button onClick={()=>handleHeader()}>
 
       <h2 className="text-xs md:text-md md:text-lg font-semibold">{tblNo>0?`שולחן  ${tblNo}`:`הזמנה : ${queueId}`}</h2>

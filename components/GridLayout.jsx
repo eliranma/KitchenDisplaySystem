@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Responsive as ResponsiveGridLayout } from "react-grid-layout";
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
@@ -12,7 +12,7 @@ import isMobile from "is-mobile";
 import { useLayoutContext } from "@/context/LayoutContext";
 
 
-const GridLayout = () => {
+const GridLayout = ({height}) => {
   let cols = isMobile()?2:4
   // const [gridData, setGridData] = useState(data)
   const {data, setData} = useAppContext()
@@ -35,7 +35,7 @@ const GridLayout = () => {
     },[data?.orders])
     
     return (
-        <div className=' overflow-x-hidden'>
+        <div className='overflow-x-hidden'>
         <ResponsiveGridLayout
           className="layout"
           compactType='vertical'
@@ -47,6 +47,7 @@ const GridLayout = () => {
           isDraggable={layoutDraggable}
           onLayoutChange={(l)=>setLayout(l)}
           width={width} // You might want to use a more sophisticated method to get width
+          
         >
         {data?.orders?data.orders.map((item,i)=>{
           return (

@@ -71,7 +71,8 @@ const Card = ({ id, bon }) => {
   // ).toString();
   useEffect(() => {
     // console.log(`card height:${cardRef.current.offsetHeight}`);
-    setBonHeight(cardRef.current.offsetHeight *0.45);
+    let scale = 0.45
+    setBonHeight(cardRef.current.offsetHeight -150);
   }, [cardRef?.current?.offsetHeight]);
 
   const renderedPDF = useMemo(() => {
