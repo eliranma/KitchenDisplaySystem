@@ -10,7 +10,7 @@ const DropdownButton = ({ children }) => {
         onClick={() => setIsOpen(prev=>!prev)}
         className=" text-white px-4 py-2 rounded"
       >
-      <>
+      {/* <> */}
         <svg
           className="h-6 w-6 text-red-500"
           fill="none"
@@ -24,7 +24,7 @@ const DropdownButton = ({ children }) => {
             d="M4 6h16M4 12h16M4 18h16"
           />
         </svg>
-        </>
+        {/* </> */}
       </button>
 
       {isOpen && (

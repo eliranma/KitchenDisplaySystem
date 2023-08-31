@@ -68,12 +68,12 @@ class ServerSideAPI {
     return result;
   };
 
-  getOrders = async (session, printer) => {
+  getOrders = async (session, printer, offset = 0, limit = 20) => {
     const authHeader = "Bearer " + session.token;
     let u = session.clientId;
     let result;
-    let suffix = `/kitchen/order/${u}/getOrders/${printer}`;
-    if (printer==='')suffix = `/kitchen/order/${u}/getOrders`;
+    let suffix = `/kitchen/order/${u}/getOrders/${printer}/?offset=${offset}&limit=${limit}`;
+    if (printer==='')suffix = `/kitchen/order/${u}/getOrders/?offset=${offset}&limit=${limit}`;
     let compUrl = baseUrl + suffix;
     // console.log(compUrl);
     await axios
@@ -90,7 +90,7 @@ class ServerSideAPI {
       })
       .catch((err) => {
         console.log(err);
-        return [];
+        return null;
       });
     return result;
   };

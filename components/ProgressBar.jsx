@@ -14,7 +14,7 @@ const ProgressBar = ({ progress, height }) => {
           {/* ProgressBar */}
           <div className="overflow-hidden w-full h-2 my-4 text-xs flex rounded bg-teal-200">
         <div 
-          style={{ width: `${progress}%` }} 
+          style={{ width: `${progress.toFixed(0)}%` }} 
           className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-teal-500 transition-all duration-500 ease-in-out"
         />
       </div>
@@ -31,3 +31,6 @@ const ProgressBar = ({ progress, height }) => {
 };
 
 export default ProgressBar;
+
+
+

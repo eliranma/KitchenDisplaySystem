@@ -57,8 +57,8 @@ const Card = ({ id, bon }) => {
     docPayTypeName,
     total,
     tblNo,
-    productCount,
-    servingName,
+    tmOpen,
+    servingId,
     prnName,
     items,
     file,
@@ -113,7 +113,7 @@ const Card = ({ id, bon }) => {
         ref={cardRef}
         className="flex flex-col p-4 h-full  relative"
       >
-        <CardHeader tblNo={tblNo} servingName={servingName} queueId={queueId} />
+        <CardHeader tmOpen={tmOpen} tblNo={tblNo} servingId={servingId} queueId={queueId} />
         <div className="flex border rounded-lg my-1">
           <div
           style={{height:bonHeight}}

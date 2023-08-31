@@ -12,7 +12,7 @@ import { useAppContext } from "@/context/AppContext";
 import { useLayoutContext } from "@/context/LayoutContext";
 
 
-const GridLayout = ({componentRef}) => {
+const GridLayout = ({height}) => {
   // const [gridData, setGridData] = useState(data)
   const {data, setData} = useAppContext()
   const {layout,setLayout, layoutDraggable} = useLayoutContext()
@@ -22,6 +22,53 @@ const GridLayout = ({componentRef}) => {
     
 
     
+
+// New state variables for infinite scroll and auto-refresh
+const [offset, setOffset] = useState(0);  // Pagination offset
+const [isLoading, setIsLoading] = useState(false);  // Loading state
+
+// Initial fetch of orders
+useEffect(() => {
+  const fetchData = async () => {
+    const newOrders = await fetchOrders(0, 20);  // Replace with your API call
+    // Update AppContext's orders state here.
+  };
+  fetchData();
+}, []);
+
+
+// Infinite Scroll Logic
+useEffect(() => {
+  const handleScroll = async () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500 && !isLoading) {
+      setIsLoading(true);
+      // Fetch next set of orders based on the current offset
+      const newOrders = await fetchOrders(offset, 20);  // Replace with your API call
+      // Append newOrders to existing orders in AppContext.
+      // Update the offset for the next pagination.
+      setOffset(offset + 20);
+      setIsLoading(false);
+    }
+  };
+
+  window.addEventListener('scroll', handleScroll);
+  return () => window.removeEventListener('scroll', handleScroll);
+}, [offset, isLoading]);
+
+
+// Auto-Refresh Logic
+useEffect(() => {
+  if (autoRefresh) {  // autoRefresh is from AppContext
+    const intervalId = setInterval(async () => {
+      // Fetch new orders based on existing orders' IDs
+      const newOrders = await newOrdersReq(existingOrderIds);  // Replace with your API call
+      // Prepend newOrders to existing orders in AppContext.
+    }, refreshInterval);  // Replace with your desired refresh interval
+
+    return () => clearInterval(intervalId);
+  }
+}, [autoRefresh, existingOrderIds]);
+
     useEffect(()=>{
       let len = data?.orders?.length
       // debugger
@@ -35,7 +82,7 @@ const GridLayout = ({componentRef}) => {
     },[data?.orders])
     
     return (
-        <div ref={componentRef} className='overflow-x-hidden'>
+        <div className='overflow-x-hidden'>
         <ResponsiveGridLayout
         
           className="layout"
