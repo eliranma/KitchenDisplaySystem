@@ -5,7 +5,7 @@ import Header from '@/components/Header'
 
 const assistant = Assistant({ subsets: ['latin'] })
 
-export default function OredresLayout({ children }) {
+export default function OrdersLayout({ children }) {
   return (
       <div className={assistant.className}>
         <Header />

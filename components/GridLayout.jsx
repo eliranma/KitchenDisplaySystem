@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import { Responsive as ResponsiveGridLayout } from "react-grid-layout";
 import React,{useState, useEffect} from 'react'
 import 'react-grid-layout/css/styles.css';
@@ -12,7 +12,7 @@ import { useAppContext } from "@/context/AppContext";
 import { useLayoutContext } from "@/context/LayoutContext";
 
 
-const GridLayout = ({componentRef}) => {
+const GridLayout = () => {
   // const [gridData, setGridData] = useState(data)
   const {data, setData} = useAppContext()
   const {layout,setLayout, layoutDraggable} = useLayoutContext()
@@ -35,9 +35,8 @@ const GridLayout = ({componentRef}) => {
     },[data?.orders])
     
     return (
-        <div ref={componentRef} className='overflow-x-hidden'>
+        <div className='overflow-x-hidden'>
         <ResponsiveGridLayout
-        
           className="layout"
           compactType='vertical'
           style={{paddingTop:5}}
@@ -48,7 +47,7 @@ const GridLayout = ({componentRef}) => {
           isDraggable={layoutDraggable}
           onLayoutChange={(l)=>setLayout(l)}
           width={width} // You might want to use a more sophisticated method to get width
-          
+          // innerRef={componentRef}
         >
         {data?.orders?data.orders.map((item,i)=>{
           return (

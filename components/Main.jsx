@@ -22,39 +22,27 @@ import NoData from "./NoData";
 
 const Main = () => {
   const { data, setData } = useAppContext();
-  const { layoutDraggable, setLayoutDraggable } = useLayoutContext();
   const router = useRouter();
-  const [showInstallMessage, setShowInstallMessage] = useState(false);
+  // const [showInstallMessage, setShowInstallMessage] = useState(false);
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [offset, setOffset] = useState(0);
   const autoRefreshIntervalRef = useRef(null);
   const wrapperRef = useRef(null);
-  // Detects if device is on iOS
-  const isIos = () => {
-    const userAgent = window.navigator.userAgent.toLowerCase();
-    return /iphone|ipad|ipod/.test(userAgent);
-  };
-  // Detects if device is in standalone mode
-  const isInStandaloneMode = () =>
-    "standalone" in window.navigator && window.navigator.standalone;
-
+  const [mainComponentHeight, setMainComponentHeight] = useState(0);
   let session = data.session;
   let orders;
   let printers;
-  let height = globalThis?.window?.innerHeight || 0 - 92;
+  let height = globalThis?.window?.innerHeight - 92 || 0;
   let prnName = data?.printerSelected?.name;
   const limit = 20;
 
   const ordersReq = async (session, printer = "", offset = 0, limit = 20) => {
     orders = await ServerSideAPI.getOrders(session, printer, offset, limit);
-    console.log(Boolean(orders));
-
-    if (!orders) return;
-
-    // Sort by tmOpen in descending order (most recent first)
+    if (!Boolean(orders)) return;
+    // Sort by tmPrint in descending order (most recent first)
     orders.sort(
-      (a, b) => new Date(b.tmOpen).getTime() - new Date(a.tmOpen).getTime()
+      (a, b) => new Date(b.tmPrint).getTime() - new Date(a.tmPrint).getTime()
     );
 
     setData((prev) => ({
@@ -62,9 +50,9 @@ const Main = () => {
       orders: orders,
       sorted: "NONE",
     }));
-    setOffset((prevOffset) => prevOffset + limit);
     // debugger
   };
+
 
   const newOrdersReq = async (session, printer = "") => {
     if (!orders) return;
@@ -84,9 +72,9 @@ const Main = () => {
         ).values(),
       ];
 
-      // Sort by tmOpen in descending order (most recent first)
+      // Sort by tmPrint in descending order (most recent first)
       updated.sort(
-        (a, b) => new Date(b.tmOpen).getTime() - new Date(a.tmOpen).getTime()
+        (a, b) => new Date(b.tmPrint).getTime() - new Date(a.tmPrint).getTime()
       );
 
       // Update state
@@ -100,6 +88,7 @@ const Main = () => {
     setData((prev) => ({ ...prev, printers: printers }));
   };
 
+  // Utils functions
   const checkLocalStorageSession = () => {
     let tmp = localStorage.getItem("session");
     tmp = JSON.parse(tmp);
@@ -107,14 +96,14 @@ const Main = () => {
     throw new Error("No session found local storage!");
   };
 
-  const handleScroll = (e) => {
-    const bottom =
-      e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
-    if (bottom) {
-      // Fetch more items
-      ordersReq(session, prnName, offset, limit);
-    }
+  const loaderProp = ({ src }) => {
+    return src;
   };
+
+  const updateHeight = (h) => {
+    setMainComponentHeight(h);
+  };
+
   // Component initialization
   useEffect(() => {
     let interval;
@@ -137,16 +126,16 @@ const Main = () => {
         // Start a timer to update the progress bar
         interval = setInterval(() => {
           setProgress((prevProgress) => {
-            if (prevProgress >= 100) {
+            if (prevProgress >= 100|| data?.orders?.length>0) {
               clearInterval(interval);
               setLoading(false);
 
               return 100;
             }
             // let progValue = ;
-            return Math.min(prevProgress + 0.5, 100);
+            return Math.min(prevProgress + 3, 100);
           });
-        }, 50); // Update every 60 seconds
+        }, 30); // Update every 30 seconds
 
         // Fetch data
         setLoading(true);
@@ -164,6 +153,7 @@ const Main = () => {
     };
 
     session?.token && fetchData();
+    
 
     return () => {
       if (interval) {
@@ -188,29 +178,6 @@ const Main = () => {
     setTimeout(() => setLoading(false), 1000);
   }, [data?.printerSelected]);
 
-  // Add this to your useEffect
-  useEffect(() => {
-    const handleScroll = (e) => {
-      const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
-      if (bottom) {
-        // Fetch more items
-        ordersReq(session, prnName, offset, limit);
-      }
-    };
-  
-    // Attach event listener
-    if (wrapperRef.current) {
-      wrapperRef.current.addEventListener("scroll", handleScroll);
-    }
-  
-    // Cleanup
-    return () => {
-      if (wrapperRef.current) {
-        wrapperRef.current.removeEventListener("scroll", handleScroll);
-      }
-    };
-  }, [offset, wrapperRef]);  // Dependency array, re-run effect if offset or wrapperRef changes
-  
   // Listen to changes of AutoRefresh Switch
   useEffect(() => {
     if (!session?.token || orders === null) return;
@@ -241,9 +208,69 @@ const Main = () => {
   While scrolling to the end a request with more 20 orders should be fetch.
   To avoid the autoRefresh missmatch we need to set the autoRefresh to false currently and start it after we received the next orders.
   I might encounter an issue to know what orders are new.
-
   */
+  const fetchNext = async(session, prnName="", offset, limit) => {
+    let req = await ServerSideAPI.getOrders(session, prnName, offset, limit);
+    console.log(req);
+    if (Boolean(req)) {
+      setOffset((prev) => prev + limit + 1);
+      let updated = [
+        ...new Map(
+          [...req, ...data.orders].map((doc) => [doc._id, doc])
+        ).values(),
+      ];
 
+      // Sort by tmPrint in descending order (most recent first)
+      updated.sort(
+        (a, b) => new Date(b.tmPrint).getTime() - new Date(a.tmPrint).getTime()
+      );
+
+      // Update state
+      setData((prev) => ({ ...prev, orders: updated }));
+    }
+  };
+  const handleScroll = (e) => {
+    const bottom =
+      e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+    if (bottom) {
+      // Fetch more items
+      setData((prev) => ({ ...prev, autoRefresh: false }));
+      console.log("offset:", offset);
+      console.log("limit:", limit);
+      //  console.log("reqOffset:",reqOffset);
+      fetchNext(session, prnName, offset, limit);
+      setData((prev) => ({ ...prev, autoRefresh: true }));
+    }
+  };
+
+  useEffect(() => {
+    console.log(wrapperRef.current);
+
+    // Attach event listener
+    if (wrapperRef.current) {
+      wrapperRef.current.addEventListener("scroll", handleScroll);
+    }
+
+    // Cleanup
+    return () => {
+      if (wrapperRef.current) {
+        wrapperRef.current.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, [offset, wrapperRef?.current]); // Dependency array, re-run effect if offset or wrapperRef changes
+
+  useEffect(() => updateHeight(height), [height]);
+  // Logging
+  useEffect(() => console.log(offset), [offset]);
+
+  // Detects if device is on iOS
+  // const isIos = () => {
+  //   const userAgent = window.navigator.userAgent.toLowerCase();
+  //   return /iphone|ipad|ipod/.test(userAgent);
+  // };
+  // // Detects if device is in standalone mode
+  // const isInStandaloneMode = () =>
+  //   "standalone" in window.navigator && window.navigator.standalone;
   // useEffect(()=>{
   //   // Checks if should display install popup notification:
   // if (isIos() && !isInStandaloneMode()) {
@@ -251,20 +278,9 @@ const Main = () => {
   // }
   // },[])
 
-  // useEffect(() => {
-  //   console.log(data.autoRefresh);
-  // }, [data?.autoRefresh]);
-  // useEffect(()=>{
-  //   console.log("orders change")
-  //   console.log(orders)
-  // },[orders])
-  const loaderProp = ({ src }) => {
-    return src;
-  };
-
   return (
     <Screen>
-      <div  className="sticky top-14 bg-white  z-50 flex h-9 flex-row">
+      <div className="sticky top-14 bg-white  z-50 flex h-9 flex-row">
         <PrinterMenu />
         {loading ? (
           <Image
@@ -281,28 +297,27 @@ const Main = () => {
             <RefreshHandler />
             <div className="flex flex-row items-center justify-around mt-1">
               <SortButton />
-              <LayoutButton  />
+              <LayoutButton />
             </div>
           </DropdownButton>
         ) : (
           <>
             <SortButton />
             <RefreshHandler />
-            <LayoutButton  />
+            <LayoutButton />
           </>
         )}
       </div>
-      <div style={{ height }}>
+      <div
+        ref={wrapperRef}
+        style={{ overflowY: "auto", height: mainComponentHeight }}
+      >
         {progress < 100 ? (
           <ProgressBar progress={progress} />
         ) : (
           <>
             {/* Not sure why but I had to convert it ti boolean */}
-            {Boolean(data?.orders) ? (
-              <GridLayout componentRef={wrapperRef}/>
-            ) : (
-              <NoData />
-            )}
+            {Boolean(data?.orders) ? <GridLayout /> : <NoData />}
           </>
         )}
       </div>

@@ -15,7 +15,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className='bg-slate-300'>
-      <body className={assistant.className}>
+      <body style={{overflowY:"auto"}} className={assistant.className}>
         <Providers>
         {children}
         </Providers>
