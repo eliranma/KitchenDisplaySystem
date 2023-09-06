@@ -32,6 +32,7 @@ const PdfModal = ({ onClose, file }) => {
       <Image src={`data:image/jpeg;base64, ${Buffer.from(file.data).toString('base64')}`} width={window.innerWidth*0.7} height={50} alt="bon" />
     );
   }, [file.data]);
+  // TODO: Enlarge the modal
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div

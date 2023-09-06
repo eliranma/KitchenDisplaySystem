@@ -13,7 +13,7 @@ import { useEffect, useRef, useState } from "react";
 // import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import ServerSideAPI from "../utils/api";
-import { useLayoutContext } from "../context/LayoutContext";
+// import { useLayoutContext } from "../context/LayoutContext";
 import { useAppContext } from "@/context/AppContext";
 import isMobile from "is-mobile";
 import Image from "next/image";
@@ -42,7 +42,8 @@ const Main = () => {
     if (!Boolean(orders)) return;
     // Sort by tmPrint in descending order (most recent first)
     orders.sort(
-      (a, b) => new Date(b.tmPrint).getTime() - new Date(a.tmPrint).getTime()
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     );
 
     setData((prev) => ({
@@ -53,12 +54,16 @@ const Main = () => {
     // debugger
   };
 
-
   const newOrdersReq = async (session, printer = "") => {
     if (!orders) return;
     let currentIds = [];
+    // TODO: Fix this - should ignore the 
     orders.map((o) => currentIds.push(o._id));
-    // console.log(currentIds);
+    console.log(currentIds);
+    let exists = await ServerSideAPI.checkExists(session, currentIds);
+    if (exists !== null) {
+      currentIds = exists?.found || currentIds
+    }
     let newOrders = await ServerSideAPI.askForNewOrders(
       session,
       currentIds,
@@ -74,7 +79,8 @@ const Main = () => {
 
       // Sort by tmPrint in descending order (most recent first)
       updated.sort(
-        (a, b) => new Date(b.tmPrint).getTime() - new Date(a.tmPrint).getTime()
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       );
 
       // Update state
@@ -126,7 +132,7 @@ const Main = () => {
         // Start a timer to update the progress bar
         interval = setInterval(() => {
           setProgress((prevProgress) => {
-            if (prevProgress >= 100|| data?.orders?.length>0) {
+            if (prevProgress >= 100 || data?.orders?.length > 0) {
               clearInterval(interval);
               setLoading(false);
 
@@ -153,7 +159,6 @@ const Main = () => {
     };
 
     session?.token && fetchData();
-    
 
     return () => {
       if (interval) {
@@ -209,7 +214,7 @@ const Main = () => {
   To avoid the autoRefresh missmatch we need to set the autoRefresh to false currently and start it after we received the next orders.
   I might encounter an issue to know what orders are new.
   */
-  const fetchNext = async(session, prnName="", offset, limit) => {
+  const fetchNext = async (session, prnName = "", offset, limit) => {
     let req = await ServerSideAPI.getOrders(session, prnName, offset, limit);
     console.log(req);
     if (Boolean(req)) {
@@ -222,7 +227,8 @@ const Main = () => {
 
       // Sort by tmPrint in descending order (most recent first)
       updated.sort(
-        (a, b) => new Date(b.tmPrint).getTime() - new Date(a.tmPrint).getTime()
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       );
 
       // Update state
@@ -316,8 +322,8 @@ const Main = () => {
           <ProgressBar progress={progress} />
         ) : (
           <>
-            {/* Not sure why but I had to convert it ti boolean */}
-            {Boolean(data?.orders) ? <GridLayout /> : <NoData />}
+            {/* Not sure why but I had to convert it to boolean */}
+            {Boolean(data?.orders)? <GridLayout /> : <NoData />}
           </>
         )}
       </div>

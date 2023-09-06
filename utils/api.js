@@ -31,18 +31,18 @@ class ServerSideAPI {
     let result;
     let suffix = `/kitchen/order/${clientId}/newOrders`;
     let compUrl = baseUrl + suffix;
-    let reqBody = {orders:exists, printer:printer};
+    let reqBody = { orders: exists, printer: printer };
     await axios
-      .post(compUrl, reqBody, { headers: { Authorization: authHeader }})
+      .post(compUrl, reqBody, { headers: { Authorization: authHeader } })
       .then((res) => {
-        result =res.data;
-        return
+        result = res.data;
+        return;
       })
       .catch((err) => {
         console.log(err);
-        result = []
+        result = [];
       });
-      return result
+    return result;
   };
 
   updateOrderStatus = async (orderId, session) => {
@@ -68,12 +68,39 @@ class ServerSideAPI {
     return result;
   };
 
+  checkExists = async (session, orders) => {
+    const authHeader = "Bearer " + session.token;
+    let u = session.clientId;
+    let result;
+    let suffix = `/kitchen/order/${u}/validateExists`;
+    let compUrl = baseUrl + suffix;
+    await axios
+      .post(
+        compUrl,
+        { orders: orders },
+        { headers: { Authorization: authHeader } }
+      )
+      .then((res) => {
+        if (res.status === 200) {
+          result = res.data;
+        } else {
+          result = null;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        result = null;
+      });
+    return result;
+  };
+
   getOrders = async (session, printer, offset = 0, limit = 20) => {
     const authHeader = "Bearer " + session.token;
     let u = session.clientId;
     let result;
     let suffix = `/kitchen/order/${u}/getOrders/${printer}/?offset=${offset}&limit=${limit}`;
-    if (printer==='')suffix = `/kitchen/order/${u}/getOrders/?offset=${offset}&limit=${limit}`;
+    if (printer === "")
+      suffix = `/kitchen/order/${u}/getOrders/?offset=${offset}&limit=${limit}`;
     let compUrl = baseUrl + suffix;
     // console.log(compUrl);
     await axios
