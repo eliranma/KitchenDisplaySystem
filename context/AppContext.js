@@ -12,7 +12,7 @@ export const AppProvider = ({ children }) => {
     printerSelected: "הכל",
     isRememberMe: true,
     sorted:"NONE",
-    autoRefresh: true
+    autoRefresh: false
   }); // You can store any state here
   // console.log(data);
   return (

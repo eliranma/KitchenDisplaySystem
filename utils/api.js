@@ -108,16 +108,19 @@ class ServerSideAPI {
       .then((res) => {
         // console.log(res.data);
         if (!res) {
+          // console.log("BAD");
           result = res;
           return result;
         } else {
+          // console.log("good");
           result = res.data;
           return result;
         }
       })
       .catch((err) => {
+        // console.log("BAD2");
         console.log(err);
-        return null;
+        result =  [];
       });
     return result;
   };

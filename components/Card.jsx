@@ -22,7 +22,7 @@ const Card = ({ id, bon }) => {
       try {
         let res = await ServerSideAPI.updateOrderStatus(bon._id, data.session);
         if (res === true) {
-          let tmp = data.orders;
+          let tmp = [...data.orders];
           tmp.splice(id, 1);
           setData((prev) => ({ ...prev, orders: tmp }));
           // console.log(data.orders);

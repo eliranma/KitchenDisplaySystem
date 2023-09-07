@@ -27,6 +27,7 @@ const Main = () => {
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [offset, setOffset] = useState(0);
+  const [hasData, setHasData] = useState(false);
   const autoRefreshIntervalRef = useRef(null);
   const wrapperRef = useRef(null);
   const [mainComponentHeight, setMainComponentHeight] = useState(0);
@@ -39,41 +40,47 @@ const Main = () => {
 
   const ordersReq = async (session, printer = "", offset = 0, limit = 20) => {
     orders = await ServerSideAPI.getOrders(session, printer, offset, limit);
-    if (!Boolean(orders)) return;
+    console.log(orders);
+    if (orders === null) return;
     // Sort by tmPrint in descending order (most recent first)
     orders.sort(
       (a, b) =>
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     );
-
+    // console.log("GOOD!");
     setData((prev) => ({
       ...prev,
       orders: orders,
       sorted: "NONE",
+      autoRefresh: true,
     }));
     // debugger
   };
 
   const newOrdersReq = async (session, printer = "") => {
-    if (!orders) return;
+    // if (data.orders) return;
     let currentIds = [];
-    // TODO: Fix this - should ignore the 
-    orders.map((o) => currentIds.push(o._id));
+    console.log(data);
+    let tmp = [...data.orders];
+    // TODO: Fix this - should ignore the
+    tmp.map((o) => currentIds.push(o._id));
     console.log(currentIds);
     let exists = await ServerSideAPI.checkExists(session, currentIds);
+    console.log(exists);
     if (exists !== null) {
-      currentIds = exists?.found || currentIds
+      currentIds = exists?.found || currentIds;
     }
     let newOrders = await ServerSideAPI.askForNewOrders(
       session,
       currentIds,
       printer
     );
+    console.log(newOrders);
     if (!newOrders) return;
     if (Array.isArray(newOrders) && newOrders.length > 0) {
       let updated = [
         ...new Map(
-          [...newOrders, ...orders].map((doc) => [doc._id, doc])
+          [...newOrders, ...tmp].map((doc) => [doc._id, doc])
         ).values(),
       ];
 
@@ -106,6 +113,17 @@ const Main = () => {
     return src;
   };
 
+  const upadteDataStatus = () => {
+    let tmp = data.orders===null?[]:[...data.orders]
+    console.log(tmp)
+    if (tmp.length>0) {
+      console.log("SHOW");
+      setHasData(true);
+    } else {
+      console.log("DONT SHOW");
+      setHasData(false);
+    }
+  };
   const updateHeight = (h) => {
     setMainComponentHeight(h);
   };
@@ -263,11 +281,14 @@ const Main = () => {
         wrapperRef.current.removeEventListener("scroll", handleScroll);
       }
     };
-  }, [offset, wrapperRef?.current]); // Dependency array, re-run effect if offset or wrapperRef changes
+  }, [wrapperRef?.current]); // Dependency array, re-run effect if wrapperRef changes
 
+  useEffect(() => {
+    upadteDataStatus();
+  }, [data?.orders]);
   useEffect(() => updateHeight(height), [height]);
   // Logging
-  useEffect(() => console.log(offset), [offset]);
+  useEffect(() => console.log(data), [data]);
 
   // Detects if device is on iOS
   // const isIos = () => {
@@ -323,7 +344,7 @@ const Main = () => {
         ) : (
           <>
             {/* Not sure why but I had to convert it to boolean */}
-            {Boolean(data?.orders)? <GridLayout /> : <NoData />}
+            {hasData ? <GridLayout /> : <NoData />}
           </>
         )}
       </div>
