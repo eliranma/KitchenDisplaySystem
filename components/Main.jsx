@@ -32,14 +32,13 @@ const Main = () => {
   const wrapperRef = useRef(null);
   const [mainComponentHeight, setMainComponentHeight] = useState(0);
   let session = data.session;
-  let orders;
   let printers;
   let height = globalThis?.window?.innerHeight - 92 || 0;
   let prnName = data?.printerSelected?.name;
   const limit = 20;
 
-  const ordersReq = async (session, printer = "", offset = 0, limit = 20) => {
-    orders = await ServerSideAPI.getOrders(session, printer, offset, limit);
+  const ordersReq = async (session, printer = "", offset = 0, limit = 20) => {   
+    let orders = await ServerSideAPI.getOrders(session, printer, offset, limit);
     console.log(orders);
     if (orders === null) return;
     // Sort by tmPrint in descending order (most recent first)
@@ -57,43 +56,100 @@ const Main = () => {
     // debugger
   };
 
+  // const newOrdersReq = async (session, printer = "") => {
+  //   // if (data.orders) return;
+  //   let currentIds = [];
+  //   console.log(data);
+  //   let tmp = [...data.orders];
+  //   // TODO: Fix this - should ignore the
+  //   console.log("tmpB:",tmp);
+  //   tmp.map((o) => currentIds.push(o._id));
+  //   // If current id array is empty return a new "orders request"
+  //   if (currentIds ===[]) return await ordersReq(session, printer, 0,20) 
+  //   let exists = await ServerSideAPI.checkExists(session, currentIds);
+  //   // console.log(exists);
+  //   if (exists !== null) {
+  //     currentIds = exists?.found || currentIds;
+  //     let tmpMiss = [...exists.missing]
+  //     tmp =[...tmp].filter((t)=>!tmpMiss.includes(t._id))
+  //     if(tmpMiss!==[])setData((prev)=>({...prev,orders:tmp}))
+  //     console.log("currentIds:",currentIds);
+  //     console.log("Exists:",exists);
+  //     console.log("tmp:",tmp);
+  //     console.log("tmpMiss:",tmpMiss);
+  //   }
+  //   let newOrders = await ServerSideAPI.askForNewOrders(
+  //     session,
+  //     currentIds,
+  //     printer
+  //   );
+  //   console.log(newOrders);
+  //   if (!newOrders) return;
+  //   if (Array.isArray(newOrders) && newOrders.length > 0) {
+  //     let updated = [
+  //       ...new Map(
+  //         [...newOrders, ...tmp].map((doc) => [doc._id, doc])
+  //       ).values(),
+  //     ];
+  //     console.log("updated:", updated);
+  //     // Sort by tmPrint in descending order (most recent first)
+  //     updated.sort(
+  //       (a, b) =>
+  //         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  //     );
+
+  //     // Update state
+  //     setData((prev) => ({ ...prev, orders: [...updated] }));
+  //   }
+  // };
+
   const newOrdersReq = async (session, printer = "") => {
-    // if (data.orders) return;
     let currentIds = [];
-    console.log(data);
     let tmp = [...data.orders];
-    // TODO: Fix this - should ignore the
     tmp.map((o) => currentIds.push(o._id));
-    console.log(currentIds);
+
+    if (currentIds.length === 0) {
+      console.log('No current IDs, fetching orders');
+      return await ordersReq(session, printer, 0, 20);
+  }
     let exists = await ServerSideAPI.checkExists(session, currentIds);
-    console.log(exists);
     if (exists !== null) {
-      currentIds = exists?.found || currentIds;
-    }
-    let newOrders = await ServerSideAPI.askForNewOrders(
-      session,
-      currentIds,
-      printer
-    );
-    console.log(newOrders);
-    if (!newOrders) return;
-    if (Array.isArray(newOrders) && newOrders.length > 0) {
-      let updated = [
-        ...new Map(
-          [...newOrders, ...tmp].map((doc) => [doc._id, doc])
-        ).values(),
-      ];
+      console.log('Exists response from API:', exists);
 
-      // Sort by tmPrint in descending order (most recent first)
-      updated.sort(
-        (a, b) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      );
-
-      // Update state
-      setData((prev) => ({ ...prev, orders: updated }));
+        currentIds = exists?.found || currentIds;
+        let tmpMiss = [...exists.missing];
+        
+        // Removed unnecessary array copying
+        // tmp = tmp.filter((t) => !tmpMiss.includes(t._id));
+        
+        if(tmpMiss.length !== 0) {
+          console.log('Missing orders found, updating state');
+          let miss = tmp.filter((t) => !tmpMiss.includes(t._id))
+          setData((prev) => ({...prev, orders: miss}));
+      }
     }
-  };
+
+    // Fetch new orders and integrate them with existing orders
+    let newOrders = await ServerSideAPI.askForNewOrders(session, currentIds, printer);
+    console.log('New orders from API:', newOrders);
+    if (newOrders && Array.isArray(newOrders) && newOrders.length > 0) {
+        let updated = [
+            ...new Map([...newOrders, ...tmp].map((doc) => [doc._id, doc])).values()
+        ];
+        
+        // Sort by tmPrint in descending order (most recent first)
+        updated.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+        
+        // Update state conditionally: Only if the new data is different from the current data
+        if (JSON.stringify(updated) !== JSON.stringify(data.orders)) {
+          console.log('New orders are different from current orders, updating state');
+            setData((prev) => ({ ...prev, orders: [...updated] }));
+        } else {
+          console.log('New orders are the same as current orders, not updating state');
+      }
+    }
+}
+
 
   const printersReq = async (session) => {
     printers = await ServerSideAPI.getPrinters(session);
@@ -203,7 +259,8 @@ const Main = () => {
 
   // Listen to changes of AutoRefresh Switch
   useEffect(() => {
-    if (!session?.token || orders === null) return;
+    let tmp = data.orders===null?[]:[...data.orders]
+    if (!session?.token || tmp === []) return;
     if (data.autoRefresh === true && session) {
       // console.log("AUTO REFRESH INTERVAL");
       autoRefreshIntervalRef.current = setInterval(async () => {
@@ -235,11 +292,12 @@ const Main = () => {
   const fetchNext = async (session, prnName = "", offset, limit) => {
     let req = await ServerSideAPI.getOrders(session, prnName, offset, limit);
     console.log(req);
-    if (Boolean(req)) {
+    let tmp = data.orders===null?[]:[...data.orders]
+    if (req!==[]) {
       setOffset((prev) => prev + limit + 1);
       let updated = [
         ...new Map(
-          [...req, ...data.orders].map((doc) => [doc._id, doc])
+          [...req,...tmp ].map((doc) => [doc._id, doc])
         ).values(),
       ];
 

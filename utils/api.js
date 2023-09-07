@@ -13,10 +13,13 @@ class ServerSideAPI {
     await axios
       .post(compUrl, { userId: p })
       .then((res) => {
-        res.status === 200 ? (result = res.data) : null;
+        res.status === 200 ? (result = res.data) : (result = null);
+        return result;
       })
       .catch((err) => {
         console.log(err);
+        // TODO: Toast a message of the error!
+        result = null;
         return null;
       });
     return result;
@@ -57,13 +60,18 @@ class ServerSideAPI {
       .then((res) => {
         if (res.status === 200) {
           result = true;
+        // TODO: Toast a message of success!
         } else {
           result = false;
+          
         }
+        return result;
       })
       .catch((err) => {
         console.log(err);
         result = false;
+        // TODO: Toast a message of the error!
+        return result;
       });
     return result;
   };
@@ -98,9 +106,10 @@ class ServerSideAPI {
     const authHeader = "Bearer " + session.token;
     let u = session.clientId;
     let result;
-    let suffix = `/kitchen/order/${u}/getOrders/${printer}/?offset=${offset}&limit=${limit}`;
-    if (printer === "")
-      suffix = `/kitchen/order/${u}/getOrders/?offset=${offset}&limit=${limit}`;
+    let suffix =
+      printer === ""
+        ? `/kitchen/order/${u}/getOrders/?offset=${offset}&limit=${limit}`
+        : `/kitchen/order/${u}/getOrders/${printer}/?offset=${offset}&limit=${limit}`;
     let compUrl = baseUrl + suffix;
     // console.log(compUrl);
     await axios
@@ -109,7 +118,7 @@ class ServerSideAPI {
         // console.log(res.data);
         if (!res) {
           // console.log("BAD");
-          result = res;
+          result =[];
           return result;
         } else {
           // console.log("good");
@@ -120,7 +129,8 @@ class ServerSideAPI {
       .catch((err) => {
         // console.log("BAD2");
         console.log(err);
-        result =  [];
+        // TODO: Toast a message of the error!
+        result = [];
       });
     return result;
   };
