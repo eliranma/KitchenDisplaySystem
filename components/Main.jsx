@@ -33,6 +33,11 @@ const Main = () => {
   const [mainComponentHeight, setMainComponentHeight] = useState(0);
   let session = data.session;
   let printers;
+  const ordersRef = useRef();
+
+useEffect(() => {
+    ordersRef.current = data.orders;
+}, [data.orders]);
   let height = globalThis?.window?.innerHeight - 92 || 0;
   let prnName = data?.printerSelected?.name;
   const limit = 20;
@@ -56,99 +61,53 @@ const Main = () => {
     // debugger
   };
 
-  // const newOrdersReq = async (session, printer = "") => {
-  //   // if (data.orders) return;
-  //   let currentIds = [];
-  //   console.log(data);
-  //   let tmp = [...data.orders];
-  //   // TODO: Fix this - should ignore the
-  //   console.log("tmpB:",tmp);
-  //   tmp.map((o) => currentIds.push(o._id));
-  //   // If current id array is empty return a new "orders request"
-  //   if (currentIds ===[]) return await ordersReq(session, printer, 0,20) 
-  //   let exists = await ServerSideAPI.checkExists(session, currentIds);
-  //   // console.log(exists);
-  //   if (exists !== null) {
-  //     currentIds = exists?.found || currentIds;
-  //     let tmpMiss = [...exists.missing]
-  //     tmp =[...tmp].filter((t)=>!tmpMiss.includes(t._id))
-  //     if(tmpMiss!==[])setData((prev)=>({...prev,orders:tmp}))
-  //     console.log("currentIds:",currentIds);
-  //     console.log("Exists:",exists);
-  //     console.log("tmp:",tmp);
-  //     console.log("tmpMiss:",tmpMiss);
-  //   }
-  //   let newOrders = await ServerSideAPI.askForNewOrders(
-  //     session,
-  //     currentIds,
-  //     printer
-  //   );
-  //   console.log(newOrders);
-  //   if (!newOrders) return;
-  //   if (Array.isArray(newOrders) && newOrders.length > 0) {
-  //     let updated = [
-  //       ...new Map(
-  //         [...newOrders, ...tmp].map((doc) => [doc._id, doc])
-  //       ).values(),
-  //     ];
-  //     console.log("updated:", updated);
-  //     // Sort by tmPrint in descending order (most recent first)
-  //     updated.sort(
-  //       (a, b) =>
-  //         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-  //     );
-
-  //     // Update state
-  //     setData((prev) => ({ ...prev, orders: [...updated] }));
-  //   }
-  // };
-
   const newOrdersReq = async (session, printer = "") => {
+    // if (data.orders) return;
     let currentIds = [];
-    let tmp = [...data.orders];
+    console.log(data);
+    let tmp = [...ordersRef.current];
+    // TODO: Fix this - should ignore the
+    console.log("tmpB:",tmp);
     tmp.map((o) => currentIds.push(o._id));
-
-    if (currentIds.length === 0) {
-      console.log('No current IDs, fetching orders');
-      return await ordersReq(session, printer, 0, 20);
-  }
+    // If current id array is empty return a new "orders request"
+    if (currentIds ===[]) return await ordersReq(session, printer, 0,20) 
     let exists = await ServerSideAPI.checkExists(session, currentIds);
+    // console.log(exists);
     if (exists !== null) {
-      console.log('Exists response from API:', exists);
-
-        currentIds = exists?.found || currentIds;
-        let tmpMiss = [...exists.missing];
-        
-        // Removed unnecessary array copying
-        // tmp = tmp.filter((t) => !tmpMiss.includes(t._id));
-        
-        if(tmpMiss.length !== 0) {
-          console.log('Missing orders found, updating state');
-          let miss = tmp.filter((t) => !tmpMiss.includes(t._id))
-          setData((prev) => ({...prev, orders: miss}));
-      }
+      currentIds = exists?.found || currentIds;
+      let tmpMiss = [...exists.missing]
+      tmp =[...tmp].filter((t)=>!tmpMiss.includes(t._id))
+      if(tmpMiss!==[])setData((prev)=>({...prev,orders:tmp}))
+      console.log("currentIds:",currentIds);
+      console.log("Exists:",exists);
+      console.log("tmp:",tmp);
+      console.log("tmpMiss:",tmpMiss);
     }
+    let newOrders = await ServerSideAPI.askForNewOrders(
+      session,
+      currentIds,
+      printer
+    );
+    console.log(newOrders);
+    if (!newOrders) return;
+    if (Array.isArray(newOrders) && newOrders.length > 0) {
+      let updated = [
+        ...new Map(
+          [...newOrders, ...tmp].map((doc) => [doc._id, doc])
+        ).values(),
+      ];
+      console.log("updated:", updated);
+      // Sort by tmPrint in descending order (most recent first)
+      updated.sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      );
 
-    // Fetch new orders and integrate them with existing orders
-    let newOrders = await ServerSideAPI.askForNewOrders(session, currentIds, printer);
-    console.log('New orders from API:', newOrders);
-    if (newOrders && Array.isArray(newOrders) && newOrders.length > 0) {
-        let updated = [
-            ...new Map([...newOrders, ...tmp].map((doc) => [doc._id, doc])).values()
-        ];
-        
-        // Sort by tmPrint in descending order (most recent first)
-        updated.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-        
-        // Update state conditionally: Only if the new data is different from the current data
-        if (JSON.stringify(updated) !== JSON.stringify(data.orders)) {
-          console.log('New orders are different from current orders, updating state');
-            setData((prev) => ({ ...prev, orders: [...updated] }));
-        } else {
-          console.log('New orders are the same as current orders, not updating state');
-      }
+      // Update state
+      setData((prev) => ({ ...prev, orders: [...updated] }));
     }
-}
+  };
+
 
 
   const printersReq = async (session) => {
@@ -170,7 +129,7 @@ const Main = () => {
   };
 
   const upadteDataStatus = () => {
-    let tmp = data.orders===null?[]:[...data.orders]
+    let tmp = ordersRef.current===null?[]:[...ordersRef.current]
     console.log(tmp)
     if (tmp.length>0) {
       console.log("SHOW");
@@ -258,30 +217,62 @@ const Main = () => {
   }, [data?.printerSelected]);
 
   // Listen to changes of AutoRefresh Switch
+  // useEffect(() => {
+  //   let tmp = data.orders===null?[]:[...data.orders]
+  //   if (!session?.token || tmp === []) return;
+  //   if (data.autoRefresh === true && session) {
+  //     // console.log("AUTO REFRESH INTERVAL");
+  //     autoRefreshIntervalRef.current = setInterval(async () => {
+  //       try {
+  //         let reqPrn = prnName === "הכל" ? null : prnName;
+  //         setLoading(true);
+  //         await newOrdersReq(session, reqPrn);
+  //         setTimeout(() => setLoading(false), 1000);
+  //       } catch (e) {
+  //         console.log(e);
+  //       }
+  //     }, 10000);
+  //   } else {
+  //     clearInterval(autoRefreshIntervalRef.current);
+  //   }
+
+  //   // Cleanup function to clear the interval when the component is unmounted
+  //   return () => {
+  //     clearInterval(autoRefreshIntervalRef.current);
+  //   };
+  // }, [data?.autoRefresh, session, data.session, prnName]);
+
   useEffect(() => {
-    let tmp = data.orders===null?[]:[...data.orders]
+    let tmp = ordersRef.current === null ? [] : [...ordersRef.current];
     if (!session?.token || tmp === []) return;
-    if (data.autoRefresh === true && session) {
-      // console.log("AUTO REFRESH INTERVAL");
-      autoRefreshIntervalRef.current = setInterval(async () => {
+
+    const fetchNewOrders = async () => {
         try {
-          let reqPrn = prnName === "הכל" ? null : prnName;
-          setLoading(true);
-          await newOrdersReq(session, reqPrn);
-          setTimeout(() => setLoading(false), 1000);
+            let reqPrn = prnName === "הכל" ? null : prnName;
+            setLoading(true);
+            await newOrdersReq(session, reqPrn);
+            setTimeout(() => setLoading(false), 1000);
+
+            // Schedule the next call after a delay
+            if (data.autoRefresh === true) {
+                setTimeout(fetchNewOrders, 10000);
+            }
         } catch (e) {
-          console.log(e);
+            console.log(e);
         }
-      }, 10000);
-    } else {
-      clearInterval(autoRefreshIntervalRef.current);
+    };
+
+    if (data.autoRefresh === true && session) {
+        fetchNewOrders();
     }
 
-    // Cleanup function to clear the interval when the component is unmounted
+    // Cleanup function to clear any timeouts when the component is unmounted
     return () => {
-      clearInterval(autoRefreshIntervalRef.current);
+        if (autoRefreshIntervalRef.current) {
+            clearTimeout(autoRefreshIntervalRef.current);
+        }
     };
-  }, [data?.autoRefresh, session, data.session, prnName]);
+}, [data?.autoRefresh, session, data.session, prnName]);
 
   /*
   Implemntation of the window infinite-scroll
@@ -292,7 +283,7 @@ const Main = () => {
   const fetchNext = async (session, prnName = "", offset, limit) => {
     let req = await ServerSideAPI.getOrders(session, prnName, offset, limit);
     console.log(req);
-    let tmp = data.orders===null?[]:[...data.orders]
+    let tmp = ordersRef.current===null?[]:[...ordersRef.current]
     if (req!==[]) {
       setOffset((prev) => prev + limit + 1);
       let updated = [
