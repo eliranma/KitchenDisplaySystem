@@ -71,7 +71,7 @@ const Card = ({ id, bon }) => {
   // ).toString();
   useEffect(() => {
     // console.log(`card height:${cardRef.current.offsetHeight}`);
-    let scale = 0.45
+    // let scale = 0.45
     setBonHeight(cardRef.current.offsetHeight -150);
   }, [cardRef?.current?.offsetHeight]);
 
@@ -125,7 +125,7 @@ const Card = ({ id, bon }) => {
         </div>
         <button
           onClick={handleDone}
-          className="rounded-full mx-3 absolute bottom-1.5 mt-1 left-1/2 transform -translate-x-1/2 px-12 py-1 w-auto text-white bg-[#e4004a]"
+          className="rounded-full mx-auto absolute bottom-1.5 mt-1 left-1/2 transform -translate-x-1/2 px-12 py-1 w-auto text-white bg-[#e4004a]"
         >
           בוצע
         </button>

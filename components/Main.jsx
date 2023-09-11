@@ -64,13 +64,14 @@ useEffect(() => {
   const newOrdersReq = async (session, printer = "") => {
     // if (data.orders) return;
     let currentIds = [];
-    console.log(data);
+    console.log(currentIds);
     let tmp = [...ordersRef.current];
     // TODO: Fix this - should ignore the
-    console.log("tmpB:",tmp);
+    // console.log("tmpB:",tmp);
     tmp.map((o) => currentIds.push(o._id));
     // If current id array is empty return a new "orders request"
-    if (currentIds ===[]) return await ordersReq(session, printer, 0,20) 
+    if (currentIds.length===0) return await ordersReq(session, printer) 
+    // if (currentIds.length===0) console.log("EMPTY")
     let exists = await ServerSideAPI.checkExists(session, currentIds);
     // console.log(exists);
     if (exists !== null) {
@@ -78,17 +79,17 @@ useEffect(() => {
       let tmpMiss = [...exists.missing]
       tmp =[...tmp].filter((t)=>!tmpMiss.includes(t._id))
       if(tmpMiss!==[])setData((prev)=>({...prev,orders:tmp}))
-      console.log("currentIds:",currentIds);
-      console.log("Exists:",exists);
-      console.log("tmp:",tmp);
-      console.log("tmpMiss:",tmpMiss);
+      // console.log("currentIds:",currentIds);
+      // console.log("Exists:",exists);
+      // console.log("tmp:",tmp);
+      // console.log("tmpMiss:",tmpMiss);
     }
     let newOrders = await ServerSideAPI.askForNewOrders(
       session,
       currentIds,
       printer
     );
-    console.log(newOrders);
+    // console.log(newOrders);
     if (!newOrders) return;
     if (Array.isArray(newOrders) && newOrders.length > 0) {
       let updated = [
@@ -96,7 +97,7 @@ useEffect(() => {
           [...newOrders, ...tmp].map((doc) => [doc._id, doc])
         ).values(),
       ];
-      console.log("updated:", updated);
+      // console.log("updated:", updated);
       // Sort by tmPrint in descending order (most recent first)
       updated.sort(
         (a, b) =>
@@ -130,12 +131,12 @@ useEffect(() => {
 
   const upadteDataStatus = () => {
     let tmp = ordersRef.current===null?[]:[...ordersRef.current]
-    console.log(tmp)
+    // console.log(tmp)
     if (tmp.length>0) {
-      console.log("SHOW");
+      // console.log("SHOW");
       setHasData(true);
     } else {
-      console.log("DONT SHOW");
+      // console.log("DONT SHOW");
       setHasData(false);
     }
   };
@@ -243,8 +244,10 @@ useEffect(() => {
   // }, [data?.autoRefresh, session, data.session, prnName]);
 
   useEffect(() => {
-    let tmp = ordersRef.current === null ? [] : [...ordersRef.current];
-    if (!session?.token || tmp === []) return;
+    let tmp = ordersRef.current || []; // Use '||' instead of '===' to handle null or undefined
+    if (!session?.token) {
+        return clearTimeout(autoRefreshIntervalRef.current); // Clear the interval when conditions are not met
+    }
 
     const fetchNewOrders = async () => {
         try {
@@ -255,7 +258,7 @@ useEffect(() => {
 
             // Schedule the next call after a delay
             if (data.autoRefresh === true) {
-                setTimeout(fetchNewOrders, 10000);
+                autoRefreshIntervalRef.current = setTimeout(fetchNewOrders, 10000);
             }
         } catch (e) {
             console.log(e);
@@ -264,15 +267,15 @@ useEffect(() => {
 
     if (data.autoRefresh === true && session) {
         fetchNewOrders();
+    } else {
+        clearTimeout(autoRefreshIntervalRef.current); // Clear the interval when conditions are not met
     }
 
-    // Cleanup function to clear any timeouts when the component is unmounted
+    // Cleanup function to clear the interval when the component is unmounted
     return () => {
-        if (autoRefreshIntervalRef.current) {
-            clearTimeout(autoRefreshIntervalRef.current);
-        }
+      clearTimeout(autoRefreshIntervalRef.current);
     };
-}, [data?.autoRefresh, session, data.session, prnName]);
+}, [data?.autoRefresh, session, prnName]);
 
   /*
   Implemntation of the window infinite-scroll
@@ -285,7 +288,7 @@ useEffect(() => {
     console.log(req);
     let tmp = ordersRef.current===null?[]:[...ordersRef.current]
     if (req!==[]) {
-      setOffset((prev) => prev + limit + 1);
+      setOffset((prev) => prev + limit);
       let updated = [
         ...new Map(
           [...req,...tmp ].map((doc) => [doc._id, doc])
@@ -305,11 +308,11 @@ useEffect(() => {
   const handleScroll = (e) => {
     const bottom =
       e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
-    if (bottom) {
+    if (bottom && ordersRef.current.length===offset) {
       // Fetch more items
       setData((prev) => ({ ...prev, autoRefresh: false }));
-      console.log("offset:", offset);
-      console.log("limit:", limit);
+      // console.log("offset:", offset);
+      // console.log("limit:", limit);
       //  console.log("reqOffset:",reqOffset);
       fetchNext(session, prnName, offset, limit);
       setData((prev) => ({ ...prev, autoRefresh: true }));
@@ -337,7 +340,7 @@ useEffect(() => {
   }, [data?.orders]);
   useEffect(() => updateHeight(height), [height]);
   // Logging
-  useEffect(() => console.log(data), [data]);
+  // useEffect(() => console.log(data), [data]);
 
   // Detects if device is on iOS
   // const isIos = () => {
