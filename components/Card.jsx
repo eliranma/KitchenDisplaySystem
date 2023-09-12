@@ -20,11 +20,12 @@ const Card = ({ id, bon }) => {
   const updateOrderReq = async () => {
     if (bon._id && data.session) {
       try {
+        setData(prev=>({...prev, autoRefresh:false}))
         let res = await ServerSideAPI.updateOrderStatus(bon._id, data.session);
         if (res === true) {
           let tmp = [...data.orders];
           tmp.splice(id, 1);
-          setData((prev) => ({ ...prev, orders: tmp }));
+          setData((prev) => ({ ...prev, orders: tmp, autoRefresh:true }));
           // console.log(data.orders);
           // prints the right status res.data.length -1 but thr data.order become only with this item
           return;
@@ -44,7 +45,7 @@ const Card = ({ id, bon }) => {
     setIsOpen(false);
   };
   const handleClick = () => {
-    console.log("CLIECKED");
+    console.log("CLICKED");
     setIsOpen((prev) => !prev);
   };
   const handleDone = () => {

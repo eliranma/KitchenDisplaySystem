@@ -25,7 +25,7 @@ class ServerSideAPI {
     return result;
   };
 
-  askForNewOrders = async (session, exists = [], printer = "") => {
+  askForNewOrders = async (session, last, printer = "") => {
     if (session?.token === undefined || session?.clientId === undefined) {
       return [];
     }
@@ -34,7 +34,8 @@ class ServerSideAPI {
     let result;
     let suffix = `/kitchen/order/${clientId}/newOrders`;
     let compUrl = baseUrl + suffix;
-    let reqBody = { orders: exists, printer: printer };
+    // let reqBody = { orders: exists, printer: printer };
+    let reqBody = { order:last, printer: printer };
     await axios
       .post(compUrl, reqBody, { headers: { Authorization: authHeader } })
       .then((res) => {

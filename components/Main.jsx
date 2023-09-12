@@ -18,22 +18,23 @@ import { useAppContext } from "@/context/AppContext";
 import isMobile from "is-mobile";
 import Image from "next/image";
 import NoData from "./NoData";
+import {findMaxId} from '../utils/sortFuncc'
 // import localforage from "localforage";
 
 const Main = () => {
   const { data, setData } = useAppContext();
   const router = useRouter();
   // const [showInstallMessage, setShowInstallMessage] = useState(false);
+  const [mainComponentHeight, setMainComponentHeight] = useState(0);
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [offset, setOffset] = useState(0);
   const [hasData, setHasData] = useState(false);
   const autoRefreshIntervalRef = useRef(null);
   const wrapperRef = useRef(null);
-  const [mainComponentHeight, setMainComponentHeight] = useState(0);
+  const offsetRef = useRef(0);
+  const ordersRef = useRef();
   let session = data.session;
   let printers;
-  const ordersRef = useRef();
 
 useEffect(() => {
     ordersRef.current = data.orders;
@@ -64,20 +65,20 @@ useEffect(() => {
   const newOrdersReq = async (session, printer = "") => {
     // if (data.orders) return;
     let currentIds = [];
-    console.log(currentIds);
+    let last 
+    // console.log(currentIds);
     let tmp = [...ordersRef.current];
-    // TODO: Fix this - should ignore the
-    // console.log("tmpB:",tmp);
     tmp.map((o) => currentIds.push(o._id));
+    
     // If current id array is empty return a new "orders request"
     if (currentIds.length===0) return await ordersReq(session, printer) 
-    // if (currentIds.length===0) console.log("EMPTY")
     let exists = await ServerSideAPI.checkExists(session, currentIds);
     // console.log(exists);
     if (exists !== null) {
       currentIds = exists?.found || currentIds;
       let tmpMiss = [...exists.missing]
       tmp =[...tmp].filter((t)=>!tmpMiss.includes(t._id))
+      last = findMaxId(tmp)
       if(tmpMiss!==[])setData((prev)=>({...prev,orders:tmp}))
       // console.log("currentIds:",currentIds);
       // console.log("Exists:",exists);
@@ -86,7 +87,7 @@ useEffect(() => {
     }
     let newOrders = await ServerSideAPI.askForNewOrders(
       session,
-      currentIds,
+      last,
       printer
     );
     // console.log(newOrders);
@@ -244,7 +245,7 @@ useEffect(() => {
   // }, [data?.autoRefresh, session, data.session, prnName]);
 
   useEffect(() => {
-    let tmp = ordersRef.current || []; // Use '||' instead of '===' to handle null or undefined
+    // let tmp = ordersRef.current || []; 
     if (!session?.token) {
         return clearTimeout(autoRefreshIntervalRef.current); // Clear the interval when conditions are not met
     }
@@ -288,7 +289,6 @@ useEffect(() => {
     console.log(req);
     let tmp = ordersRef.current===null?[]:[...ordersRef.current]
     if (req!==[]) {
-      setOffset((prev) => prev + limit);
       let updated = [
         ...new Map(
           [...req,...tmp ].map((doc) => [doc._id, doc])
@@ -306,15 +306,16 @@ useEffect(() => {
     }
   };
   const handleScroll = (e) => {
+    e.preventDefault()
     const bottom =
-      e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
-    if (bottom && ordersRef.current.length===offset) {
+      ((e.target.scrollHeight - e.target.scrollTop)*0.2) === (e.target.clientHeight*0.2);
+      console.log("OUTSIDE",bottom,ordersRef.current.length,offsetRef.current )
+    if (bottom) {
+      offsetRef.current += limit;
+      console.log("INSIDE",bottom,ordersRef.current.length,offsetRef.current )
       // Fetch more items
       setData((prev) => ({ ...prev, autoRefresh: false }));
-      // console.log("offset:", offset);
-      // console.log("limit:", limit);
-      //  console.log("reqOffset:",reqOffset);
-      fetchNext(session, prnName, offset, limit);
+      fetchNext(session, prnName, offsetRef.current, limit);
       setData((prev) => ({ ...prev, autoRefresh: true }));
     }
   };
@@ -340,7 +341,7 @@ useEffect(() => {
   }, [data?.orders]);
   useEffect(() => updateHeight(height), [height]);
   // Logging
-  // useEffect(() => console.log(data), [data]);
+  useEffect(() => console.log(offsetRef.current), [offsetRef.current]);
 
   // Detects if device is on iOS
   // const isIos = () => {

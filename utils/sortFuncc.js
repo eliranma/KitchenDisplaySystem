@@ -12,3 +12,15 @@ export const sortByDate=(data, order)=> {
         }
     });
 }
+export const findMaxId = (documents)=> {
+    let maxId = null;
+  
+    documents.forEach((doc) => {
+      const docId = doc._id;
+      if (!maxId || docId > maxId) {
+        maxId = docId;
+      }
+    });
+  
+    return maxId;
+  }
