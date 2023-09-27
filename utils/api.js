@@ -1,4 +1,6 @@
 import axios from "axios";
+import { sortByMongoId } from "../utils/sortFuncc";
+
 const baseUrl =
   process.env.NODE_ENV === "development"
     ? process.env.NEXT_PUBLIC_API_URL_DEV
@@ -123,7 +125,7 @@ class ServerSideAPI {
           return result;
         } else {
           // console.log("good");
-          result = res.data;
+          result = sortByMongoId(res.data);
           return result;
         }
       })
@@ -135,6 +137,7 @@ class ServerSideAPI {
       });
     return result;
   };
+  
   getPrinters = async (session) => {
     const { clientId, token } = session;
     let suffix = `/kitchen/client/${clientId}/getPrinters`;

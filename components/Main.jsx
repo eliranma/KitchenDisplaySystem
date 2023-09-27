@@ -18,7 +18,8 @@ import { useAppContext } from "@/context/AppContext";
 import isMobile from "is-mobile";
 import Image from "next/image";
 import NoData from "./NoData";
-import {findMaxId} from '../utils/sortFuncc'
+import { findMaxId } from "../utils/sortFuncc";
+import { debounce} from "../utils/debounce";
 // import localforage from "localforage";
 
 const Main = () => {
@@ -27,6 +28,7 @@ const Main = () => {
   // const [showInstallMessage, setShowInstallMessage] = useState(false);
   const [mainComponentHeight, setMainComponentHeight] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [newDataFetching, setNewDataFetching] = useState(false);
   const [progress, setProgress] = useState(0);
   const [hasData, setHasData] = useState(false);
   const autoRefreshIntervalRef = useRef(null);
@@ -34,24 +36,27 @@ const Main = () => {
   const offsetRef = useRef(0);
   const ordersRef = useRef();
   let session = data.session;
-  let printers;
-
-useEffect(() => {
-    ordersRef.current = data.orders;
-}, [data.orders]);
+  
   let height = globalThis?.window?.innerHeight - 92 || 0;
   let prnName = data?.printerSelected?.name;
   const limit = 20;
+  // let offset = 0;
 
-  const ordersReq = async (session, printer = "", offset = 0, limit = 20) => {   
+  useEffect(() => {
+    ordersRef.current = data.orders;
+  }, [data.orders]);
+
+  const ordersReq = async (session, printer = "", offset = 0, limit = 20) => {
     let orders = await ServerSideAPI.getOrders(session, printer, offset, limit);
-    console.log(orders);
+    // console.log(orders);
     if (orders === null) return;
     // Sort by tmPrint in descending order (most recent first)
-    orders.sort(
-      (a, b) =>
-        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-    );
+    
+    if (orders.length > 0) {
+      offsetRef.current +=limit;
+      console.log(`SET THE offsetRef to:${offsetRef.current}`);
+      console.log(`${orders.length}`);
+    }
     // console.log("GOOD!");
     setData((prev) => ({
       ...prev,
@@ -65,31 +70,27 @@ useEffect(() => {
   const newOrdersReq = async (session, printer = "") => {
     // if (data.orders) return;
     let currentIds = [];
-    let last 
+    let last;
     // console.log(currentIds);
     let tmp = [...ordersRef.current];
     tmp.map((o) => currentIds.push(o._id));
-    
+
     // If current id array is empty return a new "orders request"
-    if (currentIds.length===0) return await ordersReq(session, printer) 
+    
+    if (currentIds.length === 0) {
+      console.log("Due to currentId array is empty requesting ordersReq");
+      return await ordersReq(session, printer);
+    }
     let exists = await ServerSideAPI.checkExists(session, currentIds);
     // console.log(exists);
     if (exists !== null) {
       currentIds = exists?.found || currentIds;
-      let tmpMiss = [...exists.missing]
-      tmp =[...tmp].filter((t)=>!tmpMiss.includes(t._id))
-      last = findMaxId(tmp)
-      if(tmpMiss!==[])setData((prev)=>({...prev,orders:tmp}))
-      // console.log("currentIds:",currentIds);
-      // console.log("Exists:",exists);
-      // console.log("tmp:",tmp);
-      // console.log("tmpMiss:",tmpMiss);
+      let tmpMiss = [...exists.missing];
+      tmp = [...tmp].filter((t) => !tmpMiss.includes(t._id));
+      last = findMaxId(tmp);
+      if (tmpMiss !== []) setData((prev) => ({ ...prev, orders: tmp }));
     }
-    let newOrders = await ServerSideAPI.askForNewOrders(
-      session,
-      last,
-      printer
-    );
+    let newOrders = await ServerSideAPI.askForNewOrders(session, last, printer);
     // console.log(newOrders);
     if (!newOrders) return;
     if (Array.isArray(newOrders) && newOrders.length > 0) {
@@ -100,23 +101,12 @@ useEffect(() => {
       ];
       // console.log("updated:", updated);
       // Sort by tmPrint in descending order (most recent first)
-      updated.sort(
-        (a, b) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      );
-
+      // updated = sortByMongoId(updated);
       // Update state
       setData((prev) => ({ ...prev, orders: [...updated] }));
     }
   };
 
-
-
-  const printersReq = async (session) => {
-    printers = await ServerSideAPI.getPrinters(session);
-    if (!printers) return;
-    setData((prev) => ({ ...prev, printers: printers }));
-  };
 
   // Utils functions
   const checkLocalStorageSession = () => {
@@ -131,9 +121,9 @@ useEffect(() => {
   };
 
   const upadteDataStatus = () => {
-    let tmp = ordersRef.current===null?[]:[...ordersRef.current]
+    let tmp = ordersRef.current === null ? [] : [...ordersRef.current];
     // console.log(tmp)
-    if (tmp.length>0) {
+    if (tmp.length > 0) {
       // console.log("SHOW");
       setHasData(true);
     } else {
@@ -151,11 +141,11 @@ useEffect(() => {
     try {
       if (!data.session) {
         session = checkLocalStorageSession();
-        console.log(`Session found: ${session}`);
+        // console.log(`Session found: ${session}`);
         setData((prev) => ({ ...prev, session: session }));
       }
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       router.push("/");
     }
 
@@ -180,8 +170,9 @@ useEffect(() => {
 
         // Fetch data
         setLoading(true);
+      console.log("Due initializtion process requesting ordersReq");
         await ordersReq(session);
-        await printersReq(session);
+        // await printersReq(session);
 
         // Stop the timer and set progress to 100
         // clearInterval(interval);
@@ -210,6 +201,7 @@ useEffect(() => {
     prnName = prnName === "הכל" ? "" : prnName;
     try {
       setLoading(true);
+      console.log("Due to changes in selectedPrinter requesting ordersReq");
       ordersReq(session, prnName);
     } catch (e) {
       console.log(e);
@@ -245,38 +237,38 @@ useEffect(() => {
   // }, [data?.autoRefresh, session, data.session, prnName]);
 
   useEffect(() => {
-    // let tmp = ordersRef.current || []; 
+    // let tmp = ordersRef.current || [];
     if (!session?.token) {
-        return clearTimeout(autoRefreshIntervalRef.current); // Clear the interval when conditions are not met
+      return clearTimeout(autoRefreshIntervalRef.current); // Clear the interval when conditions are not met
     }
 
     const fetchNewOrders = async () => {
-        try {
-            let reqPrn = prnName === "הכל" ? null : prnName;
-            setLoading(true);
-            await newOrdersReq(session, reqPrn);
-            setTimeout(() => setLoading(false), 1000);
+      try {
+        let reqPrn = prnName === "הכל" ? null : prnName;
+        setLoading(true);
+        await newOrdersReq(session, reqPrn);
+        setTimeout(() => setLoading(false), 1000);
 
-            // Schedule the next call after a delay
-            if (data.autoRefresh === true) {
-                autoRefreshIntervalRef.current = setTimeout(fetchNewOrders, 10000);
-            }
-        } catch (e) {
-            console.log(e);
+        // Schedule the next call after a delay
+        if (data.autoRefresh === true) {
+          autoRefreshIntervalRef.current = setTimeout(fetchNewOrders, 10000);
         }
+      } catch (e) {
+        console.log(e);
+      }
     };
 
     if (data.autoRefresh === true && session) {
-        fetchNewOrders();
+      fetchNewOrders();
     } else {
-        clearTimeout(autoRefreshIntervalRef.current); // Clear the interval when conditions are not met
+      clearTimeout(autoRefreshIntervalRef.current); // Clear the interval when conditions are not met
     }
 
     // Cleanup function to clear the interval when the component is unmounted
     return () => {
       clearTimeout(autoRefreshIntervalRef.current);
     };
-}, [data?.autoRefresh, session, prnName]);
+  }, [data?.autoRefresh, session, prnName]);
 
   /*
   Implemntation of the window infinite-scroll
@@ -286,39 +278,53 @@ useEffect(() => {
   */
   const fetchNext = async (session, prnName = "", offset, limit) => {
     let req = await ServerSideAPI.getOrders(session, prnName, offset, limit);
-    console.log(req);
-    let tmp = ordersRef.current===null?[]:[...ordersRef.current]
-    if (req!==[]) {
+    // console.log(req);
+    let tmp = ordersRef.current === null ? [] : [...ordersRef.current];
+    if (req.length > 0) {
       let updated = [
-        ...new Map(
-          [...req,...tmp ].map((doc) => [doc._id, doc])
-        ).values(),
+        ...new Map([...tmp, ...req].map((doc) => [doc._id, doc])).values(),
       ];
 
       // Sort by tmPrint in descending order (most recent first)
-      updated.sort(
-        (a, b) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      );
+      // updated = sortByMongoId(updated);
 
       // Update state
+      // setTimeout(()=>setData((prev) => ({ ...prev })),1000)
       setData((prev) => ({ ...prev, orders: updated }));
-    }
-  };
-  const handleScroll = (e) => {
-    e.preventDefault()
-    const bottom =
-      ((e.target.scrollHeight - e.target.scrollTop)*0.2) === (e.target.clientHeight*0.2);
-      console.log("OUTSIDE",bottom,ordersRef.current.length,offsetRef.current )
-    if (bottom) {
       offsetRef.current += limit;
-      console.log("INSIDE",bottom,ordersRef.current.length,offsetRef.current )
+      console.log(`SET THE offsetRef to:${offsetRef.current}`);
+      setNewDataFetching(false);
+    }
+    setTimeout(
+      () => setData((prev) => ({ ...prev, autoRefresh: true })),
+      1000
+    );
+  };
+  // const handleScroll = (e) => {
+  //   e.preventDefault();
+  //   let threshold = 300;
+  //   const distanceFromBottom =
+  //     e.target.scrollHeight - (e.target.scrollTop + e.target.clientHeight);
+  //   if (distanceFromBottom <= threshold && !newDataFetching) {
+  //     // Fetch more items
+  //     setNewDataFetching(true);
+  //     setData((prev) => ({ ...prev, autoRefresh: false }));
+  //     fetchNext(session, prnName, offsetRef.current, limit);
+  //   }
+  // };
+
+  const handleScroll = debounce((e) => {
+    e.preventDefault();
+    let threshold = 500;  // Increased threshold
+    const distanceFromBottom =
+      e.target.scrollHeight - (e.target.scrollTop + e.target.clientHeight);
+    if (distanceFromBottom <= threshold && !newDataFetching) {
       // Fetch more items
+      setNewDataFetching(true);
       setData((prev) => ({ ...prev, autoRefresh: false }));
       fetchNext(session, prnName, offsetRef.current, limit);
-      setData((prev) => ({ ...prev, autoRefresh: true }));
     }
-  };
+}, 300);
 
   useEffect(() => {
     console.log(wrapperRef.current);
@@ -338,10 +344,10 @@ useEffect(() => {
 
   useEffect(() => {
     upadteDataStatus();
-  }, [data?.orders]);
+  }, [ordersRef.current]);
   useEffect(() => updateHeight(height), [height]);
   // Logging
-  useEffect(() => console.log(offsetRef.current), [offsetRef.current]);
+  // useEffect(() => console.log(offsetRef.current), [offsetRef.current]);
 
   // Detects if device is on iOS
   // const isIos = () => {
@@ -397,7 +403,7 @@ useEffect(() => {
         ) : (
           <>
             {/* Not sure why but I had to convert it to boolean */}
-            {hasData ? <GridLayout /> : <NoData />}
+            {hasData ? <GridLayout orders={ordersRef.current} /> : <NoData />}
           </>
         )}
       </div>

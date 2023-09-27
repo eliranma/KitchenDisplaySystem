@@ -19,7 +19,7 @@ const SortButton = () => {
     }
   return (
     <div className='w-max flex justify-center items-center'>
-        <button className='flex flex-row px-2 bg-green-300 rounded-full' onClick={handleButton}>
+        <button className='flex flex-row px-2 bg-[#009610] rounded-full' onClick={handleButton}>
         <p className="whitespace-nowrap overflow-hidden text-white overflow-ellipsis mx-1">מיון</p>
         {data?.sorted==='DESC'?renderSortUp():renderSortDown()}
         </button>

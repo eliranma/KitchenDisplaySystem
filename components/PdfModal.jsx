@@ -1,38 +1,13 @@
 import Image from "next/image";
 import React, { useMemo } from "react";
-import { pdfjs, Document, Page } from "react-pdf";
+// import { pdfjs, Document, Page } from "react-pdf";
 
 const PdfModal = ({ onClose, file }) => {
   const renderBon = useMemo(() => {
-    // For Html
-    // const byteArray = new Uint8Array(file.data);
-    // const decoder = new TextDecoder("utf-8");
-    // const htmlString = decoder.decode(byteArray);
-    // console.log(htmlString);
     return (
-      //  For Pdf
-
-      // <Document
-      //   className="flex items-start justify-center mx-1"
-      //   file={{ data: file.data }}
-      //   onLoadSuccess={onDocumentLoadSuccess}
-      //   noData={NoData}
-      // >
-      //   <Page
-      //     // width={pdfWidth}
-      //     renderTextLayer={false}
-      //     renderAnnotationLayer={false}
-      //     pageNumber={pageNumber}
-      //   />
-      // </Document>
-      
-      // For Receiving Html elements
-
-      // <div style={{}} dangerouslySetInnerHTML={{ __html: htmlString }} />
-      <Image src={`data:image/jpeg;base64, ${Buffer.from(file.data).toString('base64')}`} width={window.innerWidth*0.355} height={50} alt="bon" />
+          <Image src={`data:image/jpeg;base64, ${Buffer.from(file.data).toString('base64')}`} width={window.innerWidth*0.355} height={50} alt="bon" />
     );
   }, [file.data]);
-  // TODO: Enlarge the modal
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div
@@ -43,10 +18,6 @@ const PdfModal = ({ onClose, file }) => {
         {/* MODAL CONTENT */}
         <div className="flex flex-wrap overflow-y-auto items-center justify-center  max-h-[65vh] ">
           <div className=" flex justify-center items-center w-full py-5 ">
-            {/* <Document  file={file}
-        className="flex items-start" >
-          <Page width={window.innerWidth*0.65}  pageNumber={1} renderTextLayer={false} renderAnnotationLayer={false} />
-        </Document> */}
             {renderBon}
           </div>
         </div>

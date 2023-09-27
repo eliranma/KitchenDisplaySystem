@@ -2,6 +2,7 @@
 import React from 'react';
 import { useSearchParams } from 'next/navigation';
 import LoginForm from './LoginForm';
+// import logger from '@/utils/logger';
 
 const LoginPage = () => {
   const urlParams = useSearchParams()
@@ -15,10 +16,10 @@ const LoginPage = () => {
     username = null
     password = null
   }
-
+  // logger.info("HELLO WORLD!")
   return (
   <div className='flex-col  w-full h-full flex bg-slate-500'>
-  <LoginForm username={username} password={password} />;
+  <LoginForm username={username} password={password} />
   </div>)
 };
 

@@ -3,11 +3,12 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import ServerSideAPI from "../utils/api";
 import { useAppContext } from "@/context/AppContext";
+import Swal from "sweetalert2";
 // import localforage from 'localforage';
 
 const LoginForm = ({ username = null, password = null }) => {
   const router = useRouter();
-  const [errorMessage, setErrorMessage] = useState("");
+  // const [errorMessage, setErrorMessage] = useState("");
   const { setData } = useAppContext();
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
@@ -21,6 +22,33 @@ const LoginForm = ({ username = null, password = null }) => {
     }
   }, []);
 
+  const printersReq = async (session) => {
+    let printers = await ServerSideAPI.getPrinters(session);
+    if (!printers) return;
+    setData((prev) => ({ ...prev, printers: printers }));
+  };
+
+  const ordersReq = async (session, printer = "", offset = 0, limit = 20) => {
+    let orders = await ServerSideAPI.getOrders(session, printer, offset, limit);
+    if (orders === null) return;
+    if (orders.length > 0) {
+      console.log(`${orders.length}`);
+    }
+    setData((prev) => ({
+      ...prev,
+      orders: orders,
+      sorted: "NONE",
+      autoRefresh: true,
+    }));
+    // debugger
+  };
+
+  const initialization = async (data)=>{
+    await printersReq(data);
+    await ordersReq(data);
+    return router.push("/orders", { prefetch: false });
+  }
+
   const handleLogin = async (u = username, p = password) => {
     if (!u || !p) return;
     const success = await ServerSideAPI.login(u, p);
@@ -32,11 +60,24 @@ const LoginForm = ({ username = null, password = null }) => {
         ? localStorage.setItem("session", JSON.stringify(success))
         : null;
       setData((prev) => ({ ...prev, session: success, isRememberMe }));
-      setTimeout(() => {
-        router.push("/orders", { prefetch: false });
-      }, 500);
+      Swal.fire({
+        title: "!התחברות הצליחה",
+        text: "....הנך מועבר כעת",
+        icon: "success",
+        timer: 1500,
+        didClose: async () => await initialization(success),
+      });
+      // setTimeout(() => {
+
+      // }, 500);
     } else {
-      setErrorMessage("Login failed. Please check your credentials.");
+      // setErrorMessage("Login failed. Please check your credentials.");
+      Swal.fire({
+        title: "התחברות נכשלה",
+        text: "התחברות נכשלה - אנא בדוק את פרטי המשתמש",
+        icon: "error",
+        timer: 3000,
+      });
     }
   };
 
@@ -118,7 +159,7 @@ const LoginForm = ({ username = null, password = null }) => {
               התחבר
             </button>
           </div>
-          {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
+          {/* {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>} */}
         </div>
       </div>
     </div>

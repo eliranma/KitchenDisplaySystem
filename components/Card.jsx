@@ -4,19 +4,16 @@ import { createPortal } from "react-dom";
 import { useAppContext } from "@/context/AppContext";
 import CardHeader from "./CardHeader";
 import ServerSideAPI from "../utils/api";
-import NoData from "./NoData";
-import { pdfjs, Document, Page, View } from "react-pdf";
-// import isMobile from 'is-mobile';
 import PdfModal from "./PdfModal";
 import Image from "next/image";
-// import isMobile from "is-mobile";
+import Swal from "sweetalert2";
+
 
 const Card = ({ id, bon }) => {
   const cardRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
   const [bonHeight, setBonHeight] = useState(20);
   const { data, setData } = useAppContext();
-  // console.log(bon.file);
   const updateOrderReq = async () => {
     if (bon._id && data.session) {
       try {
@@ -26,28 +23,24 @@ const Card = ({ id, bon }) => {
           let tmp = [...data.orders];
           tmp.splice(id, 1);
           setData((prev) => ({ ...prev, orders: tmp, autoRefresh:true }));
-          // console.log(data.orders);
-          // prints the right status res.data.length -1 but thr data.order become only with this item
           return;
         }
-        // console.log(res);
       } catch (err) {
+        Swal.fire({
+          title:""
+        })
         console.log(err);
       }
-    } else {
-      // console.log(bon);
-    }
+    } 
   };
-  // const onDocumentLoadSuccess = ({ numPages }) => {
-  //   setNumPages(numPages);
-  // };
+
   const handleClose = () => {
     setIsOpen(false);
   };
   const handleClick = () => {
-    console.log("CLICKED");
     setIsOpen((prev) => !prev);
   };
+  
   const handleDone = () => {
     let session = data.session;
     let res = updateOrderReq(bon._id, session);
@@ -64,38 +57,13 @@ const Card = ({ id, bon }) => {
     items,
     file,
   } = bon;
-  // console.log(file);
-  // const file = pdfFile&&pdfFile!=''?require(pdfFile):null
-  // pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  //   "pdfjs-dist/build/pdf.worker.min.js",
-  //   import.meta.url
-  // ).toString();
+
   useEffect(() => {
-    // console.log(`card height:${cardRef.current.offsetHeight}`);
-    // let scale = 0.45
     setBonHeight(cardRef.current.offsetHeight -150);
   }, [cardRef?.current?.offsetHeight]);
 
   const renderedPDF = useMemo(() => {
-    //   const byteArray = new Uint8Array(file.data);
-    //   const decoder = new TextDecoder('utf-8');
-    // const htmlString = decoder.decode(byteArray);
-    // console.log(file);
     return (
-      // <Document
-      //   className="flex items-start justify-center mx-1"
-      //   file={{ data: file.data }}
-      //   onLoadSuccess={onDocumentLoadSuccess}
-      //   noData={NoData}
-      // >
-      //   <Page
-      //     // width={pdfWidth}
-      //     renderTextLayer={false}
-      //     renderAnnotationLayer={false}
-      //     pageNumber={pageNumber}
-      //   />
-      // </Document>
-      // <div dangerouslySetInnerHTML={{__html:htmlString}} />
       <Image
         alt="BON"
         src={`data:image/jpeg;base64, ${Buffer.from(file.data).toString(
@@ -103,6 +71,8 @@ const Card = ({ id, bon }) => {
         )}`}
         width={window.innerWidth}
         height={20}
+        // placeholder="empty"
+        // blurDataURL='data:image/jpeg;base64,LEHV6nWB2yk8pyo0adR*.7kCMdnj'
       />
     );
   }, [file]);
@@ -114,7 +84,7 @@ const Card = ({ id, bon }) => {
         ref={cardRef}
         className="flex flex-col p-4 h-full  relative"
       >
-        <CardHeader tmOpen={tmOpen} tblNo={tblNo} servingId={servingId} queueId={queueId} />
+        <CardHeader id={id} tmOpen={tmOpen} tblNo={tblNo} servingId={servingId} queueId={queueId} />
         <div className="flex border rounded-lg my-1">
           <div
           style={{height:bonHeight}}

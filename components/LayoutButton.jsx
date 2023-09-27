@@ -11,7 +11,7 @@ const LayoutButton = () => {
     <div className="flex justify-center w-max py-1 mr-1">
       {!layoutDraggable ? (
         <button
-          className="flex items-center rounded-full px-5 bg-emerald-400"
+          className="flex items-center rounded-full px-5 bg-[#009610]"
           onClick={() => handleLayoutStatic()}
         >
           <p className="whitespace-nowrap overflow-hidden text-white overflow-ellipsis">

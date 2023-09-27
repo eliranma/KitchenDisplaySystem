@@ -1,0 +1,33 @@
+name: Auto Merge
+
+on:
+  push:
+    branches:
+      - development
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Run tests
+      run: |
+        # Here, you'd run whatever tests are relevant for your project
+        # For example, if it's a Node.js project:
+        # npm install
+        # npm test
+
+  merge-to-production:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Merge to production
+      run: |
+        git checkout production
+        git merge --ff-only origin/development
+        git push origin production
