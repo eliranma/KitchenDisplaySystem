@@ -43,8 +43,17 @@ const Main = () => {
   // let offset = 0;
 
   useEffect(() => {
+    if (data.printers === null) {
+    ServerSideAPI.getPrinters(session).then((printers)=>{
+      setData((prev) => ({ ...prev, printers: printers }));
+    }).catch((error) => {
+      console.error(error);
+    })
+  }
     ordersRef.current = data.orders;
   }, [data.orders]);
+
+
 
   const ordersReq = async (session, printer = "", offset = 0, limit = 20) => {
     let orders = await ServerSideAPI.getOrders(session, printer, offset, limit);
